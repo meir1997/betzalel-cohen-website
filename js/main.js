@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const idx = POSTS.indexOf(p);
       return `
       <div class="post-card" style="animation-delay:${i * 0.1}s">
-        <div class="post-card-image">
+        <div class="post-card-image" data-post-url="${p.url}">
           <div class="post-card-image-placeholder">${p.title.charAt(0)}</div>
         </div>
         <div class="post-card-body">
@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>`;
     }).join('');
+
+    // Load images for featured posts
+    loadPostImages();
   }
 
   // === Homepage: Recent Posts List (next 6) ===
@@ -54,4 +57,52 @@ function formatDate(dateStr) {
   const months = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
   const d = new Date(dateStr);
   return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+// ===== Lazy Load Post Images =====
+function loadPostImages() {
+  const cards = document.querySelectorAll('.post-card-image[data-post-url]');
+  cards.forEach(card => {
+    const url = card.getAttribute('data-post-url');
+    if (!url) return;
+    fetchPostImage(url).then(imgUrl => {
+      if (imgUrl) {
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = '';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.loading = 'lazy';
+        const placeholder = card.querySelector('.post-card-image-placeholder');
+        if (placeholder) placeholder.style.display = 'none';
+        card.appendChild(img);
+      }
+    });
+  });
+}
+
+async function fetchPostImage(postUrl) {
+  const proxies = [
+    'https://corsproxy.io/?' + encodeURIComponent(postUrl),
+    'https://api.allorigins.win/raw?url=' + encodeURIComponent(postUrl)
+  ];
+  for (const proxyUrl of proxies) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 6000);
+      const response = await fetch(proxyUrl, { signal: controller.signal });
+      clearTimeout(timeout);
+      if (!response.ok) continue;
+      const html = await response.text();
+      // Find first content image (not header/logo)
+      const match = html.match(/class="separator"[^>]*>.*?<img[^>]+src="(https:\/\/blogger\.googleusercontent\.com\/img\/[^"]+)"/s);
+      if (match) return match[1];
+      // Fallback: any blogger image
+      const match2 = html.match(/<img[^>]+src="(https:\/\/blogger\.googleusercontent\.com\/img\/[^"]+)"/);
+      if (match2) return match2[1];
+      return null;
+    } catch (e) { continue; }
+  }
+  return null;
 }
