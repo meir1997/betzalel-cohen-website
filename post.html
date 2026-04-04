@@ -195,10 +195,11 @@
       document.getElementById('breadcrumbYear').textContent = post.year;
       document.getElementById('sourceLink').href = post.url;
 
-      // Content — use full content if available, otherwise use excerpt
-      const content = post.content || post.excerpt;
-      const paragraphs = content.split('\n').filter(p => p.trim());
-      document.getElementById('postContent').innerHTML = paragraphs.map(p => '<p>' + p + '</p>').join('');
+      // Show excerpt while loading full content
+      document.getElementById('postContent').innerHTML = '<p style="color:var(--gray-400);"><em>טוען את המאמר המלא...</em></p>';
+
+      // Fetch full content from Blogspot JSON feed
+      fetchFullContent(post);
 
       // Prev / Next navigation
       const navEl = document.getElementById('postNav');
@@ -215,6 +216,65 @@
     } else {
       document.getElementById('postTitle').textContent = 'מאמר לא נמצא';
       document.getElementById('postContent').innerHTML = '<p>המאמר המבוקש לא נמצא. <a href="blog.html">חזרה לבלוג</a></p>';
+    }
+
+    // Fetch full blog post content from Blogspot JSON feed
+    async function fetchFullContent(post) {
+      const contentEl = document.getElementById('postContent');
+      try {
+        // Blogspot JSON feed — fetch posts in batches to find the matching one
+        const feedUrl = 'https://betochami.blogspot.com/feeds/posts/default?alt=json&max-results=500';
+        const response = await fetch(feedUrl);
+        if (!response.ok) throw new Error('Feed fetch failed');
+        const data = await response.json();
+
+        // Find matching post by comparing URLs or titles
+        const entries = data.feed.entry || [];
+        let matchedEntry = null;
+
+        for (const entry of entries) {
+          // Check if any link matches our post URL
+          const links = entry.link || [];
+          for (const link of links) {
+            if (link.rel === 'alternate' && link.href) {
+              // Compare URLs loosely (remove protocol differences)
+              const entryUrl = link.href.replace(/^https?:\/\//, '');
+              const postUrl = post.url.replace(/^https?:\/\//, '');
+              if (entryUrl === postUrl) {
+                matchedEntry = entry;
+                break;
+              }
+            }
+          }
+          // Also try matching by title
+          if (!matchedEntry && entry.title && entry.title.$t === post.title) {
+            matchedEntry = entry;
+          }
+          if (matchedEntry) break;
+        }
+
+        if (matchedEntry && matchedEntry.content && matchedEntry.content.$t) {
+          // Got full HTML content from Blogspot
+          let html = matchedEntry.content.$t;
+          // Clean up: remove inline styles that might break layout
+          html = html.replace(/style="[^"]*direction:\s*ltr[^"]*"/gi, '');
+          contentEl.innerHTML = html;
+          // Make images responsive
+          contentEl.querySelectorAll('img').forEach(img => {
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            img.style.borderRadius = '8px';
+            img.style.margin = '16px 0';
+          });
+        } else {
+          // Fallback to excerpt
+          contentEl.innerHTML = '<p>' + post.excerpt + '</p><p style="margin-top:24px; color:var(--gray-400);"><em>לקריאת המאמר המלא, לחצו על הקישור למקור למטה.</em></p>';
+        }
+      } catch (err) {
+        console.log('Feed fetch error:', err);
+        // Fallback to excerpt
+        contentEl.innerHTML = '<p>' + post.excerpt + '</p><p style="margin-top:24px; color:var(--gray-400);"><em>לקריאת המאמר המלא, לחצו על הקישור למקור למטה.</em></p>';
+      }
     }
   </script>
 </body>
