@@ -195,11 +195,13 @@
       document.getElementById('breadcrumbYear').textContent = post.year;
       document.getElementById('sourceLink').href = post.url;
 
-      // Show excerpt while loading full content
-      document.getElementById('postContent').innerHTML = '<p style="color:var(--gray-400);"><em>טוען את המאמר המלא...</em></p>';
-
-      // Fetch full content from Blogspot JSON feed
-      fetchFullContent(post);
+      // Show full content via iframe from Blogspot
+      document.getElementById('postContent').innerHTML =
+        '<iframe id="blogFrame" src="' + post.url + '" ' +
+        'style="width:100%; min-height:800px; border:none; border-radius:8px; background:white;" ' +
+        'loading="lazy"></iframe>' +
+        '<p style="margin-top:16px; font-size:0.85rem; color:var(--gray-400); text-align:center;">' +
+        'המאמר מוצג מהבלוג המקורי "בתוך עמי"</p>';
 
       // Prev / Next navigation
       const navEl = document.getElementById('postNav');
@@ -218,66 +220,6 @@
       document.getElementById('postContent').innerHTML = '<p>המאמר המבוקש לא נמצא. <a href="blog.html">חזרה לבלוג</a></p>';
     }
 
-    // Fetch full blog post content from Blogspot using JSONP (bypasses CORS)
-    function fetchFullContent(post) {
-      const contentEl = document.getElementById('postContent');
-
-      // Create a unique callback name
-      const callbackName = 'blogCallback_' + Date.now();
-
-      // Set up the callback
-      window[callbackName] = function(data) {
-        try {
-          const entries = data.feed.entry || [];
-          let matchedEntry = null;
-
-          for (const entry of entries) {
-            const links = entry.link || [];
-            for (const link of links) {
-              if (link.rel === 'alternate' && link.href) {
-                const entryUrl = link.href.replace(/^https?:\/\//, '').replace(/\/$/, '');
-                const postUrl = post.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
-                if (entryUrl === postUrl) {
-                  matchedEntry = entry;
-                  break;
-                }
-              }
-            }
-            if (!matchedEntry && entry.title && entry.title.$t === post.title) {
-              matchedEntry = entry;
-            }
-            if (matchedEntry) break;
-          }
-
-          if (matchedEntry && matchedEntry.content && matchedEntry.content.$t) {
-            let html = matchedEntry.content.$t;
-            contentEl.innerHTML = html;
-            contentEl.querySelectorAll('img').forEach(function(img) {
-              img.style.maxWidth = '100%';
-              img.style.height = 'auto';
-              img.style.borderRadius = '8px';
-              img.style.margin = '16px 0';
-            });
-          } else {
-            contentEl.innerHTML = '<p>' + post.excerpt + '</p><p style="margin-top:24px; color:var(--gray-400);"><em>לקריאת המאמר המלא, לחצו על הקישור למקור למטה.</em></p>';
-          }
-        } catch (e) {
-          contentEl.innerHTML = '<p>' + post.excerpt + '</p><p style="margin-top:24px; color:var(--gray-400);"><em>לקריאת המאמר המלא, לחצו על הקישור למקור למטה.</em></p>';
-        }
-        // Cleanup
-        delete window[callbackName];
-        document.getElementById('jsonpScript').remove();
-      };
-
-      // Load JSONP script — Blogspot supports alt=json-in-script with callback
-      const script = document.createElement('script');
-      script.id = 'jsonpScript';
-      script.src = 'https://betochami.blogspot.com/feeds/posts/default?alt=json-in-script&callback=' + callbackName + '&max-results=500';
-      script.onerror = function() {
-        contentEl.innerHTML = '<p>' + post.excerpt + '</p><p style="margin-top:24px; color:var(--gray-400);"><em>לקריאת המאמר המלא, לחצו על הקישור למקור למטה.</em></p>';
-      };
-      document.body.appendChild(script);
-    }
   </script>
 </body>
 </html>
