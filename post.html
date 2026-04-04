@@ -234,15 +234,83 @@
 
         if (postBody) {
           contentEl.innerHTML = postBody.innerHTML;
-          // Make images responsive
+
+          // Remove blog header/banner images (the orange "בתוך עמי" header)
+          contentEl.querySelectorAll('a[imageanchor], .separator').forEach(function(el) {
+            var img = el.querySelector('img');
+            if (img) {
+              var src = (img.src || img.getAttribute('data-src') || '').toLowerCase();
+              // Remove header/banner images (usually first image or blog branding)
+              if (src.includes('header') || src.includes('banner') || src.includes('logo') ||
+                  el.parentElement === contentEl && el === contentEl.firstElementChild) {
+                // Check if it's likely a header: large width or at the very top
+                var width = parseInt(img.getAttribute('width') || img.style.width || '0');
+                if (width > 500 || el === contentEl.firstElementChild) {
+                  el.remove();
+                  return;
+                }
+              }
+            }
+          });
+
+          // Remove the first element if it's a div/table containing just the blog header image
+          var first = contentEl.firstElementChild;
+          if (first) {
+            var firstImg = first.querySelector('img');
+            if (firstImg) {
+              var src = (firstImg.src || firstImg.getAttribute('data-src') || '').toLowerCase();
+              if (src.includes('btochami') || src.includes('betochami') || src.includes('header')) {
+                first.remove();
+              }
+            }
+          }
+
+          // Remove any remaining separator divs that only contain the header image
+          contentEl.querySelectorAll('.separator').forEach(function(sep) {
+            var imgs = sep.querySelectorAll('img');
+            if (imgs.length === 1) {
+              var s = (imgs[0].src || '').toLowerCase();
+              if (s.includes('btochami') || s.includes('betochami') || s.includes('header') || s.includes('banner')) {
+                sep.remove();
+              }
+            }
+          });
+
+          // Remove scripts and iframes
+          contentEl.querySelectorAll('script, iframe').forEach(function(s) { s.remove(); });
+
+          // Remove empty elements at the top
+          while (contentEl.firstElementChild && contentEl.firstElementChild.textContent.trim() === '' && !contentEl.firstElementChild.querySelector('img')) {
+            contentEl.firstElementChild.remove();
+          }
+
+          // Make remaining images responsive and nice
           contentEl.querySelectorAll('img').forEach(function(img) {
             img.style.maxWidth = '100%';
             img.style.height = 'auto';
             img.style.borderRadius = '8px';
-            img.style.margin = '16px 0';
+            img.style.margin = '20px auto';
+            img.style.display = 'block';
           });
-          // Remove any scripts from the content
-          contentEl.querySelectorAll('script').forEach(function(s) { s.remove(); });
+
+          // Clean up inline styles that mess with RTL layout
+          contentEl.querySelectorAll('[style]').forEach(function(el) {
+            var style = el.getAttribute('style');
+            if (style) {
+              // Remove direction:ltr, text-align:left that break Hebrew layout
+              style = style.replace(/direction\s*:\s*ltr\s*;?/gi, '');
+              style = style.replace(/text-align\s*:\s*left\s*;?/gi, '');
+              el.setAttribute('style', style);
+            }
+          });
+
+          // Style the text nicely
+          contentEl.querySelectorAll('div, p, span').forEach(function(el) {
+            if (el.children.length === 0 || el.querySelector('br')) {
+              el.style.lineHeight = '2';
+              el.style.marginBottom = '12px';
+            }
+          });
         } else {
           throw new Error('No post body found');
         }
