@@ -195,13 +195,9 @@
       document.getElementById('breadcrumbYear').textContent = post.year;
       document.getElementById('sourceLink').href = post.url;
 
-      // Show full content via iframe from Blogspot
-      document.getElementById('postContent').innerHTML =
-        '<iframe id="blogFrame" src="' + post.url + '" ' +
-        'style="width:100%; min-height:800px; border:none; border-radius:8px; background:white;" ' +
-        'loading="lazy"></iframe>' +
-        '<p style="margin-top:16px; font-size:0.85rem; color:var(--gray-400); text-align:center;">' +
-        'המאמר מוצג מהבלוג המקורי "בתוך עמי"</p>';
+      // Show loading state then fetch full content
+      document.getElementById('postContent').innerHTML = '<p style="color:var(--gray-400); text-align:center;"><em>טוען את המאמר המלא...</em></p>';
+      fetchFullContent(post);
 
       // Prev / Next navigation
       const navEl = document.getElementById('postNav');
@@ -220,6 +216,43 @@
       document.getElementById('postContent').innerHTML = '<p>המאמר המבוקש לא נמצא. <a href="blog.html">חזרה לבלוג</a></p>';
     }
 
+    async function fetchFullContent(post) {
+      const contentEl = document.getElementById('postContent');
+      try {
+        // Use CORS proxy to fetch the blog post HTML
+        const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(post.url);
+        const response = await fetch(proxyUrl);
+        if (!response.ok) throw new Error('Proxy fetch failed');
+        const html = await response.text();
+
+        // Parse the HTML and extract the post body
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Blogspot post content is usually in .post-body or .entry-content
+        const postBody = doc.querySelector('.post-body') || doc.querySelector('.entry-content') || doc.querySelector('article');
+
+        if (postBody) {
+          contentEl.innerHTML = postBody.innerHTML;
+          // Make images responsive
+          contentEl.querySelectorAll('img').forEach(function(img) {
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            img.style.borderRadius = '8px';
+            img.style.margin = '16px 0';
+          });
+          // Remove any scripts from the content
+          contentEl.querySelectorAll('script').forEach(function(s) { s.remove(); });
+        } else {
+          throw new Error('No post body found');
+        }
+      } catch (err) {
+        console.log('Fetch error:', err);
+        // Fallback to excerpt
+        contentEl.innerHTML = '<p>' + post.excerpt + '</p>' +
+          '<p style="margin-top:24px; color:var(--gray-400);"><em>לקריאת המאמר המלא, לחצו על הקישור למקור למטה.</em></p>';
+      }
+    }
   </script>
 </body>
 </html>
