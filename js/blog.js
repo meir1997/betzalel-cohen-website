@@ -88,17 +88,19 @@ function render() {
     } else {
       listEl.innerHTML = pageItems.map((p, i) => {
         const idx = POSTS.indexOf(p);
+        const thumbContent = p.image
+          ? '<img src="' + p.image + '" alt="" style="width:100%;height:100%;object-fit:cover;" loading="lazy">'
+          : p.title.charAt(0);
+        const thumbBg = p.image ? 'background:none;' : 'background:linear-gradient(135deg,#1a3557,#2c5282);';
         return `
         <div class="post-list-card" style="animation-delay:${i * 0.05}s">
-          <div class="post-list-thumb" data-post-url="${p.url}" style="height:140px;border-radius:8px;overflow:hidden;margin-bottom:12px;background:linear-gradient(135deg,#1a3557,#2c5282);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.2);font-family:'Frank Ruhl Libre',serif;font-size:2.5rem;font-weight:900;">${p.title.charAt(0)}</div>
+          <div style="height:140px;border-radius:8px;overflow:hidden;margin-bottom:12px;${thumbBg}display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.2);font-family:'Frank Ruhl Libre',serif;font-size:2.5rem;font-weight:900;">${thumbContent}</div>
           <span class="post-list-date">${formatDate(p.date)}</span>
           <h3 class="post-list-title"><a href="post.html?id=${idx}">${p.title}</a></h3>
           <p class="post-list-excerpt">${p.excerpt}</p>
           <a href="post.html?id=${idx}" class="post-list-read">קרא עוד ←</a>
         </div>`;
       }).join('');
-      // Lazy load images for blog cards
-      loadBlogImages();
     }
   }
 
@@ -140,53 +142,3 @@ function formatDate(dateStr) {
   return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
 }
 
-// Lazy load images for blog list cards (only visible ones)
-function loadBlogImages() {
-  const thumbs = document.querySelectorAll('.post-list-thumb[data-post-url]');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const url = el.getAttribute('data-post-url');
-        observer.unobserve(el);
-        fetchPostImageBlog(url).then(imgUrl => {
-          if (imgUrl) {
-            el.innerHTML = '';
-            el.style.background = 'none';
-            const img = document.createElement('img');
-            img.src = imgUrl;
-            img.alt = '';
-            img.style.width = '100%';
-            img.style.height = '100%';
-            img.style.objectFit = 'cover';
-            el.appendChild(img);
-          }
-        });
-      }
-    });
-  }, { rootMargin: '200px' });
-  thumbs.forEach(t => observer.observe(t));
-}
-
-async function fetchPostImageBlog(postUrl) {
-  const proxies = [
-    'https://corsproxy.io/?' + encodeURIComponent(postUrl),
-    'https://api.allorigins.win/raw?url=' + encodeURIComponent(postUrl)
-  ];
-  for (const proxyUrl of proxies) {
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 6000);
-      const response = await fetch(proxyUrl, { signal: controller.signal });
-      clearTimeout(timeout);
-      if (!response.ok) continue;
-      const html = await response.text();
-      const match = html.match(/class="separator"[^>]*>.*?<img[^>]+src="(https:\/\/blogger\.googleusercontent\.com\/img\/[^"]+)"/s);
-      if (match) return match[1];
-      const match2 = html.match(/<img[^>]+src="(https:\/\/blogger\.googleusercontent\.com\/img\/[^"]+)"/);
-      if (match2) return match2[1];
-      return null;
-    } catch (e) { continue; }
-  }
-  return null;
-}
