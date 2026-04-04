@@ -123,10 +123,6 @@
         <p>טוען תוכן...</p>
       </div>
 
-      <a id="sourceLink" href="#" target="_blank" class="source-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        קרא את המקור בבלוג המקורי
-      </a>
 
       <!-- Nav to prev/next -->
       <div class="post-nav-bottom" id="postNav"></div>
@@ -168,6 +164,7 @@
   </footer>
 
   <script src="js/posts-data.js"></script>
+  <script src="js/posts-content.js"></script>
   <script>
     // Mobile nav
     document.getElementById('navToggle').addEventListener('click', () => {
@@ -193,11 +190,8 @@
       document.getElementById('postTitle').textContent = post.title;
       document.getElementById('postDate').textContent = formatDate(post.date);
       document.getElementById('breadcrumbYear').textContent = post.year;
-      document.getElementById('sourceLink').href = post.url;
-
-      // Show loading state then fetch full content
-      document.getElementById('postContent').innerHTML = '<p style="color:var(--gray-400); text-align:center;"><em>טוען את המאמר המלא...</em></p>';
-      fetchFullContent(post);
+      // Load content from local data (instant)
+      loadContent(post);
 
       // Prev / Next navigation
       const navEl = document.getElementById('postNav');
@@ -216,125 +210,77 @@
       document.getElementById('postContent').innerHTML = '<p>המאמר המבוקש לא נמצא. <a href="blog.html">חזרה לבלוג</a></p>';
     }
 
-    async function fetchFullContent(post) {
-      const contentEl = document.getElementById('postContent');
-      try {
-        // Try multiple CORS proxies as fallback
-        const proxies = [
-          'https://corsproxy.io/?' + encodeURIComponent(post.url),
-          'https://api.allorigins.win/raw?url=' + encodeURIComponent(post.url),
-          'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(post.url)
-        ];
-        let html = null;
-        for (const proxyUrl of proxies) {
-          try {
-            const controller = new AbortController();
-            const timeout = setTimeout(() => controller.abort(), 8000);
-            const response = await fetch(proxyUrl, { signal: controller.signal });
-            clearTimeout(timeout);
-            if (response.ok) {
-              html = await response.text();
-              if (html && html.length > 500) break;
-            }
-          } catch (e) { continue; }
-        }
-        if (!html) throw new Error('All proxies failed');
+    function loadContent(post) {
+      var contentEl = document.getElementById('postContent');
+      var html = (typeof POST_CONTENT !== 'undefined') ? POST_CONTENT[post.url] : null;
 
-        // Parse the HTML and extract the post body
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-
-        // Blogspot post content is usually in .post-body or .entry-content
-        const postBody = doc.querySelector('.post-body') || doc.querySelector('.entry-content') || doc.querySelector('article');
-
-        if (postBody) {
-          contentEl.innerHTML = postBody.innerHTML;
-
-          // Remove blog header/banner images (the orange "בתוך עמי" header)
-          contentEl.querySelectorAll('a[imageanchor], .separator').forEach(function(el) {
-            var img = el.querySelector('img');
-            if (img) {
-              var src = (img.src || img.getAttribute('data-src') || '').toLowerCase();
-              // Remove header/banner images (usually first image or blog branding)
-              if (src.includes('header') || src.includes('banner') || src.includes('logo') ||
-                  el.parentElement === contentEl && el === contentEl.firstElementChild) {
-                // Check if it's likely a header: large width or at the very top
-                var width = parseInt(img.getAttribute('width') || img.style.width || '0');
-                if (width > 500 || el === contentEl.firstElementChild) {
-                  el.remove();
-                  return;
-                }
-              }
-            }
-          });
-
-          // Remove the first element if it's a div/table containing just the blog header image
-          var first = contentEl.firstElementChild;
-          if (first) {
-            var firstImg = first.querySelector('img');
-            if (firstImg) {
-              var src = (firstImg.src || firstImg.getAttribute('data-src') || '').toLowerCase();
-              if (src.includes('btochami') || src.includes('betochami') || src.includes('header')) {
-                first.remove();
-              }
-            }
-          }
-
-          // Remove any remaining separator divs that only contain the header image
-          contentEl.querySelectorAll('.separator').forEach(function(sep) {
-            var imgs = sep.querySelectorAll('img');
-            if (imgs.length === 1) {
-              var s = (imgs[0].src || '').toLowerCase();
-              if (s.includes('btochami') || s.includes('betochami') || s.includes('header') || s.includes('banner')) {
-                sep.remove();
-              }
-            }
-          });
-
-          // Remove scripts and iframes
-          contentEl.querySelectorAll('script, iframe').forEach(function(s) { s.remove(); });
-
-          // Remove empty elements at the top
-          while (contentEl.firstElementChild && contentEl.firstElementChild.textContent.trim() === '' && !contentEl.firstElementChild.querySelector('img')) {
-            contentEl.firstElementChild.remove();
-          }
-
-          // Make remaining images responsive and nice
-          contentEl.querySelectorAll('img').forEach(function(img) {
-            img.style.maxWidth = '100%';
-            img.style.height = 'auto';
-            img.style.borderRadius = '8px';
-            img.style.margin = '20px auto';
-            img.style.display = 'block';
-          });
-
-          // Clean up inline styles that mess with RTL layout
-          contentEl.querySelectorAll('[style]').forEach(function(el) {
-            var style = el.getAttribute('style');
-            if (style) {
-              // Remove direction:ltr, text-align:left that break Hebrew layout
-              style = style.replace(/direction\s*:\s*ltr\s*;?/gi, '');
-              style = style.replace(/text-align\s*:\s*left\s*;?/gi, '');
-              el.setAttribute('style', style);
-            }
-          });
-
-          // Style the text nicely
-          contentEl.querySelectorAll('div, p, span').forEach(function(el) {
-            if (el.children.length === 0 || el.querySelector('br')) {
-              el.style.lineHeight = '2';
-              el.style.marginBottom = '12px';
-            }
-          });
-        } else {
-          throw new Error('No post body found');
-        }
-      } catch (err) {
-        console.log('Fetch error:', err);
+      if (html) {
+        contentEl.innerHTML = html;
+        cleanupContent(contentEl);
+      } else {
         // Fallback to excerpt
-        contentEl.innerHTML = '<p>' + post.excerpt + '</p>' +
-          '<p style="margin-top:24px; color:var(--gray-400);"><em>לקריאת המאמר המלא, לחצו על הקישור למקור למטה.</em></p>';
+        contentEl.innerHTML = '<p>' + post.excerpt + '</p>';
       }
+    }
+
+    function cleanupContent(el) {
+      // Remove scripts and iframes
+      el.querySelectorAll('script, iframe').forEach(function(s) { s.remove(); });
+
+      // Remove blog header/banner image if it's the first element
+      var first = el.firstElementChild;
+      if (first) {
+        var firstImg = first.querySelector('img');
+        if (firstImg) {
+          var src = (firstImg.src || firstImg.getAttribute('data-src') || '').toLowerCase();
+          if (src.includes('btochami') || src.includes('betochami') || src.includes('header') || src.includes('banner')) {
+            first.remove();
+          }
+        }
+      }
+
+      // Remove separator divs with only a header image
+      el.querySelectorAll('.separator').forEach(function(sep) {
+        var imgs = sep.querySelectorAll('img');
+        if (imgs.length === 1) {
+          var s = (imgs[0].src || '').toLowerCase();
+          if (s.includes('btochami') || s.includes('betochami') || s.includes('header') || s.includes('banner')) {
+            sep.remove();
+          }
+        }
+      });
+
+      // Remove empty elements at top
+      while (el.firstElementChild && el.firstElementChild.textContent.trim() === '' && !el.firstElementChild.querySelector('img')) {
+        el.firstElementChild.remove();
+      }
+
+      // Make images responsive
+      el.querySelectorAll('img').forEach(function(img) {
+        img.style.maxWidth = '100%';
+        img.style.height = 'auto';
+        img.style.borderRadius = '8px';
+        img.style.margin = '20px auto';
+        img.style.display = 'block';
+      });
+
+      // Fix RTL
+      el.querySelectorAll('[style]').forEach(function(item) {
+        var style = item.getAttribute('style');
+        if (style) {
+          style = style.replace(/direction\s*:\s*ltr\s*;?/gi, '');
+          style = style.replace(/text-align\s*:\s*left\s*;?/gi, '');
+          item.setAttribute('style', style);
+        }
+      });
+
+      // Nice text styling
+      el.querySelectorAll('div, p, span').forEach(function(item) {
+        if (item.children.length === 0 || item.querySelector('br')) {
+          item.style.lineHeight = '2';
+          item.style.marginBottom = '12px';
+        }
+      });
     }
   </script>
 </body>
