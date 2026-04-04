@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>פודקאסט חרדים למדינה — בצלאל כהן</title>
+  <meta name="description" content="חרדים למדינה — סיפור משותף. פודקאסט מבית המכון החרדי לדמוקרטיה עם הרב בצלאל כהן ומיכל גלבוע אטר." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .podcast-hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 80px 0 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .podcast-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .podcast-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(229,62,62,0.15);
+      border: 1px solid rgba(229,62,62,0.35);
+      color: #fc8181;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+    }
+    .podcast-section { padding: 72px 0; }
+    .podcast-section-alt { padding: 72px 0; background: var(--parchment); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .episodes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .episode-card {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 20px;
+      align-items: center;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      transition: all var(--transition);
+      text-decoration: none;
+      color: inherit;
+    }
+    .episode-card:hover {
+      border-color: #e53e3e;
+      box-shadow: var(--shadow);
+      transform: translateX(-3px);
+    }
+    .episode-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .ep-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a1a2e, #0f3460);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .ep-duration {
+      font-size: 0.78rem;
+      color: var(--gray-400);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .episode-info { }
+    .episode-title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+    .episode-guest {
+      font-size: 0.85rem;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .episode-meta {
+      font-size: 0.8rem;
+      color: var(--gray-400);
+    }
+    .episode-play {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #e53e3e;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .episode-card:hover .episode-play {
+      background: #c53030;
+      transform: scale(1.08);
+    }
+
+    .hosts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .host-card {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      border: 1px solid var(--border);
+    }
+    .host-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-family: 'Frank Ruhl Libre', serif;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+    .host-name {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 2px;
+    }
+    .host-desc {
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .host-bio {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.55;
+    }
+
+    .listen-platforms {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .platform-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all var(--transition);
+      border: 2px solid;
+    }
+    .platform-youtube {
+      background: #e53e3e;
+      color: white;
+      border-color: #e53e3e;
+    }
+    .platform-youtube:hover {
+      background: #c53030;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(229,62,62,0.35);
+    }
+
+    .podcast-cta {
+      background: linear-gradient(135deg, #1a1a2e, #0f3460);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      text-align: center;
+      color: white;
+    }
+    .podcast-cta h2 { color: white; margin-bottom: 14px; }
+    .podcast-cta p { color: rgba(255,255,255,0.7); margin-bottom: 28px; max-width: 560px; margin-left:auto; margin-right:auto; }
+
+    @media (max-width: 700px) {
+      .episode-card { grid-template-columns: 60px 1fr 42px; gap: 12px; padding: 14px 16px; }
+      .ep-duration { display: none; }
+      .episode-play { width: 42px; height: 42px; }
+      .hosts-grid { grid-template-columns: 1fr; }
+      .host-card { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo">
+          <span class="logo-name">בצלאל כהן</span>
+          <span class="logo-sub">בתוך עמי</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html">דף הבית</a>
+          <a href="blog.html">בלוג</a>
+          <a href="about.html">אודות</a>
+          <a href="hdi.html">המכון לדמוקרטיה</a>
+          <a href="podcast.html" class="active">פודקאסט</a>
+          <a href="contact.html" class="nav-cta">צור קשר</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="תפריט">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="podcast-hero">
+    <div class="container" style="position:relative; z-index:1;">
+      <div style="max-width:700px;">
+        <div class="podcast-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23" stroke="currentColor" stroke-width="2"/><line x1="8" y1="23" x2="16" y2="23" stroke="currentColor" stroke-width="2"/></svg>
+          פודקאסט
+        </div>
+        <h1 style="font-size:clamp(2.2rem,5vw,3.5rem); font-weight:900; color:white; line-height:1.15; margin-bottom:4px;">
+          חרדים למדינה
+        </h1>
+        <p style="font-family:'Frank Ruhl Libre',serif; font-size:1.3rem; color:#fc8181; font-weight:400; margin-bottom:20px;">
+          סיפור משותף
+        </p>
+        <p style="font-size:clamp(1rem,2vw,1.1rem); color:rgba(255,255,255,0.72); line-height:1.75; margin-bottom:28px; max-width:600px;">
+          פודקאסט מבית המכון החרדי לדמוקרטיה, המבקש לבנות גשר אינטלקטואלי וערכי מעל התהום הפעורה בחברה הישראלית. דרך דיאלוג בין הקול החילוני-אזרחי של מיכל גלבוע אטר לבין הקול התורני-ממלכתי של הרב בצלאל כהן.
+        </p>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="btn" style="background:#e53e3e; color:white; border-color:#e53e3e;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="white" points="9.545,15.568 15.818,12 9.545,8.432"/></svg>
+            צפו ביוטיוב
+          </a>
+          <a href="#episodes" class="btn btn-outline">לרשימת הפרקים</a>
+        </div>
+        <div style="display:flex; gap:32px; margin-top:36px; padding-top:32px; border-top:1px solid rgba(255,255,255,0.12);">
+          <div class="stat-item">
+            <span class="stat-num" style="color:#fc8181;">11</span>
+            <span class="stat-label">פרקים</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" style="color:#fc8181;">2026</span>
+            <span class="stat-label">עונה ראשונה</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" style="color:#fc8181;">זה_באוויר</span>
+            <span class="stat-label">מבית "עוגן לעתיד"</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOSTS -->
+  <section class="podcast-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" style="color:#e53e3e;">המנחים</span>
+        <h2 class="section-title">שני קולות, סיפור משותף</h2>
+        <p class="section-desc">דיאלוג בין הקול החילוני-אזרחי לקול התורני-ממלכתי</p>
+        <div class="section-divider" style="background:linear-gradient(90deg,#e53e3e,#fc8181);"></div>
+      </div>
+
+      <div class="hosts-grid">
+        <div class="host-card">
+          <div class="host-avatar" style="background:linear-gradient(135deg, var(--navy-dark), var(--navy));">ב</div>
+          <div>
+            <div class="host-name">הרב בצלאל כהן</div>
+            <div class="host-desc">הקול התורני-ממלכתי</div>
+            <p class="host-bio">מייסד המכון החרדי לדמוקרטיה, מייסד ישיבת חכמי לב, מנהיג קהילתי ויזם חברתי לשילוב חרדים בחברה הישראלית.</p>
+          </div>
+        </div>
+        <div class="host-card">
+          <div class="host-avatar" style="background:linear-gradient(135deg, #5b2c8a, #7b3faf);">מ</div>
+          <div>
+            <div class="host-name">מיכל גלבוע אטר</div>
+            <div class="host-desc">הקול החילוני-אזרחי</div>
+            <p class="host-bio">מייסדת המכון, שני עשורים של קידום תרבות דמוקרטית, מנכ"לית ארגון "ילדותא" ולשעבר מנכ"לית המכון הדמוקרטי.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EPISODES -->
+  <section class="podcast-section-alt" id="episodes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" style="color:#e53e3e;">פרקים</span>
+        <h2 class="section-title">כל הפרקים</h2>
+        <p class="section-desc">11 פרקים — עונה ראשונה, 2026</p>
+        <div class="section-divider" style="background:linear-gradient(90deg,#e53e3e,#fc8181);"></div>
+      </div>
+
+      <div class="episodes-list">
+
+        <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="episode-card">
+          <div class="episode-num">
+            <span class="ep-number">1</span>
+            <span class="ep-duration">52:10</span>
+          </div>
+          <div class="episode-info">
+            <div class="episode-title">"לא יצאתי בשאלה, יצאתי עם תשובה"</div>
+            <div class="episode-guest">עם איילת קרויזר</div>
+            <div class="episode-meta">626 צפיות</div>
+          </div>
+          <div class="episode-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="episode-card">
+          <div class="episode-num">
+            <span class="ep-number">2</span>
+            <span class="ep-duration">37:56</span>
+          </div>
+          <div class="episode-info">
+            <div class="episode-title">אישה חרדית בלב המחנה הליברלי</div>
+            <div class="episode-guest">עם ציפי לביא</div>
+            <div class="episode-meta">251 צפיות</div>
+          </div>
+          <div class="episode-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="episode-card">
+          <div class="episode-num">
+            <span class="ep-number">3</span>
+            <span class="ep-duration">35:11</span>
+          </div>
+          <div class="episode-info">
+            <div class="episode-title">יהדות בכפיה עובדת?</div>
+            <div class="episode-guest">עם ד"ר אוהד וייגלר</div>
+            <div class="episode-meta">268 צפיות</div>
+          </div>
+          <div class="episode-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="episode-card">
+          <div class="episode-num">
+            <span class="ep-number">4</span>
+            <span class="ep-duration">47:29</span>
+          </div>
+          <div class="episode-info">
+            <div class="episode-title">בין הישיבה לשדה הקרב</div>
+            <div class="episode-guest">עם יעקב הרשקוביץ</div>
+            <div class="episode-meta">329 צפיות</div>
+          </div>
+          <div class="episode-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="episode-card">
+          <div class="episode-num">
+            <span class="ep-number">5</span>
+            <span class="ep-duration">37:13</span>
+          </div>
+          <div class="episode-info">
+            <div class="episode-title">למה הגברים נעצרו והנשים רצות קדימה?</div>
+            <div class="episode-guest">עם ד"ר גלעד מלאך</div>
+            <div class="episode-meta">193 צפיות</div>
+          </div>
+          <div class="episode-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="episode-card">
+          <div class="episode-num">
+            <span class="ep-number">6</span>
+            <span class="ep-duration">38:44</span>
+          </div>
+          <div class="episode-info">
+            <div class="episode-title">איך נחיה פה יחד? נורית קנטי מראיינת את מיכל ובצלאל</div>
+            <div class="episode-guest">עם נורית קנטי</div>
+            <div class="episode-meta">443 צפיות</div>
+          </div>
+          <div class="episode-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="episode-card">
+          <div class="episode-num">
+            <span class="ep-number">7</span>
+            <span class="ep-duration">41:39</span>
+          </div>
+          <div class="episode-info">
+            <div class="episode-title">לא שילוב, שותפות: הצעיר החרדי שמחשב מסלול מחדש</div>
+            <div class="episode-guest">עם שלמה רבינוביץ</div>
+            <div class="episode-meta">672 צפיות</div>
+          </div>
+          <div class="episode-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="episode-card">
+          <div class="episode-num">
+            <span class="ep-number">8</span>
+            <span class="ep-duration">39:48</span>
+          </div>
+          <div class="episode-info">
+            <div class="episode-title">"זה הכלכלה, כבוד הרב..."</div>
+            <div class="episode-guest">עם שלמה טייטלבאום</div>
+            <div class="episode-meta">389 צפיות</div>
+          </div>
+          <div class="episode-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </a>
+
+      </div>
+
+      <p style="text-align:center; margin-top:28px; font-size:0.9rem; color:var(--gray-400);">
+        + 3 פרקים נוספים זמינים בפלייליסט ביוטיוב
+      </p>
+    </div>
+  </section>
+
+  <!-- ABOUT PODCAST -->
+  <section class="podcast-section">
+    <div class="container">
+      <div style="max-width:800px; margin:0 auto; text-align:center;">
+        <span class="section-label" style="color:#e53e3e;">על הפודקאסט</span>
+        <h2 class="section-title" style="margin-bottom:20px;">למה "חרדים למדינה"?</h2>
+        <p style="font-size:1.05rem; color:var(--text-light); line-height:1.85; margin-bottom:20px;">
+          בשנת 2026, כשהסטטוס-קוו הישן קרס אל מול מציאות ביטחונית וכלכלית חדשה, הפודקאסט מזמין לשיח עומק נטול סיסמאות.
+        </p>
+        <p style="font-size:1.05rem; color:var(--text-light); line-height:1.85; margin-bottom:36px;">
+          אנו מאתגרים את הנרטיבים המקובלים ומחפשים שפה של אחריות משותפת לעתיד המדינה — דרך שיחות עם אורחים מובילים מהעולם החרדי ומעבר לו.
+        </p>
+        <p style="font-size:0.9rem; color:var(--gray-400);">
+          הפקה: <strong style="color:var(--navy-dark);">זה_באוויר</strong> מבית "עוגן לעתיד"
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 72px 0; background: var(--gray-50);">
+    <div class="container">
+      <div class="podcast-cta">
+        <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);">האזינו לפודקאסט</h2>
+        <p>כל הפרקים זמינים בחינם ביוטיוב. הצטרפו לשיח.</p>
+        <div class="listen-platforms">
+          <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="platform-btn platform-youtube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="white" points="9.545,15.568 15.818,12 9.545,8.432"/></svg>
+            צפו ביוטיוב
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo-name" style="font-family:'Frank Ruhl Libre',serif; color:white; font-size:1.4rem;">בצלאל כהן</span>
+          <span class="logo-sub" style="color:var(--gold-light); font-size:0.75rem; letter-spacing:0.06em; display:block; margin-top:4px;">בתוך עמי</span>
+          <p>מחשבות על החברה החרדית, חינוך, מנהיגות ועתיד יהדות ישראל.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">ניווט</div>
+          <div class="footer-links">
+            <a href="index.html">דף הבית</a>
+            <a href="blog.html">בלוג</a>
+            <a href="about.html">אודות</a>
+            <a href="hdi.html">המכון לדמוקרטיה</a>
+            <a href="podcast.html">פודקאסט</a>
+            <a href="contact.html">צור קשר</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">קישורים</div>
+          <div class="footer-links">
+            <a href="https://www.hdi.org.il/" target="_blank">אתר HDI</a>
+            <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank">פודקאסט ביוטיוב</a>
+            <a href="https://betochami.blogspot.com/" target="_blank">בלוג בתוך עמי</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 בצלאל כהן. כל הזכויות שמורות.</span>
+        <span>נבנה באהבה <span class="footer-gold">♦</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

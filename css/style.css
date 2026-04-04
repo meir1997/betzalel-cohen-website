@@ -1,0 +1,1206 @@
+/* ===========================
+   BETZALEL COHEN — WEBSITE
+   Design System & Styles
+   RTL Hebrew
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Heebo:wght@300;400;500;600;700&display=swap');
+
+/* ---- CSS Variables ---- */
+:root {
+  --navy:        #1a3557;
+  --navy-dark:   #0f2238;
+  --navy-light:  #2c5282;
+  --gold:        #b7862a;
+  --gold-light:  #d4a83a;
+  --gold-pale:   #f5e9c8;
+  --parchment:   #f7f3ec;
+  --white:       #ffffff;
+  --gray-50:     #f9fafb;
+  --gray-100:    #f3f4f6;
+  --gray-200:    #e5e7eb;
+  --gray-300:    #d1d5db;
+  --gray-400:    #9ca3af;
+  --gray-500:    #6b7280;
+  --gray-700:    #374151;
+  --gray-900:    #111827;
+  --text:        #1a1a2e;
+  --text-light:  #4a5568;
+  --border:      #e2e8f0;
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.08);
+  --shadow:      0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg:   0 12px 40px rgba(0,0,0,0.14);
+  --radius:      8px;
+  --radius-lg:   16px;
+  --transition:  0.2s ease;
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Heebo', sans-serif;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--text);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+/* ---- Typography ---- */
+h1, h2, h3, h4, h5 {
+  font-family: 'Frank Ruhl Libre', serif;
+  line-height: 1.3;
+  color: var(--navy-dark);
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 500; }
+h4 { font-size: 1.1rem; font-weight: 600; }
+
+p { margin-bottom: 1.2em; }
+p:last-child { margin-bottom: 0; }
+
+/* ---- Layout ---- */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.container--narrow {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================
+   HEADER / NAV
+============================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--navy-dark);
+  border-bottom: 3px solid var(--gold);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+.site-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.logo-name {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.01em;
+}
+.logo-sub {
+  font-size: 0.72rem;
+  color: var(--gold-light);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+.site-nav {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.site-nav a {
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.82);
+  transition: all var(--transition);
+}
+.site-nav a:hover,
+.site-nav a.active {
+  color: var(--white);
+  background: rgba(255,255,255,0.12);
+}
+
+.nav-cta {
+  background: var(--gold) !important;
+  color: var(--white) !important;
+  padding: 8px 18px !important;
+  font-weight: 600 !important;
+}
+.nav-cta:hover {
+  background: var(--gold-light) !important;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ============================
+   HERO
+============================ */
+.hero {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #1e4a7a 100%);
+  padding: 80px 0 90px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(183, 134, 42, 0.2);
+  border: 1px solid rgba(183, 134, 42, 0.4);
+  color: var(--gold-light);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  letter-spacing: 0.04em;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 6px;
+  line-height: 1.15;
+}
+.hero-title span {
+  color: var(--gold-light);
+}
+
+.hero-subtitle {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(255,255,255,0.72);
+  margin-bottom: 28px;
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-portrait {
+  width: 220px;
+  flex-shrink: 0;
+}
+.hero-portrait-img {
+  width: 220px;
+  height: 280px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  border: 4px solid rgba(255,255,255,0.15);
+  box-shadow: var(--shadow-lg);
+}
+.hero-portrait-placeholder {
+  width: 220px;
+  height: 280px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  border: 4px solid rgba(255,255,255,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: rgba(255,255,255,0.4);
+}
+.hero-portrait-placeholder svg {
+  opacity: 0.5;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 36px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+  display: block;
+}
+.stat-label {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  font-weight: 400;
+  margin-top: 4px;
+  display: block;
+}
+
+/* ============================
+   BUTTONS
+============================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all var(--transition);
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--white);
+  border-color: var(--gold);
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(183,134,42,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255,255,255,0.35);
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.6);
+}
+
+.btn-navy {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+.btn-navy:hover {
+  background: var(--navy-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+/* ============================
+   SECTION HEADERS
+============================ */
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.section-label {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--navy-dark);
+  margin-bottom: 14px;
+}
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--text-light);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.section-divider {
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  margin: 16px auto 0;
+  border-radius: 3px;
+}
+
+/* ============================
+   FEATURED POSTS
+============================ */
+.section-featured {
+  padding: 80px 0;
+  background: var(--white);
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.post-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+.post-card-image {
+  height: 180px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  overflow: hidden;
+  position: relative;
+}
+.post-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.post-card:hover .post-card-image img {
+  transform: scale(1.04);
+}
+.post-card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--navy) 0%, #1e4a7a 100%);
+  color: rgba(255,255,255,0.2);
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+}
+
+.post-card-body {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.post-date {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  font-weight: 400;
+}
+.post-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--navy);
+  background: rgba(26,53,87,0.08);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.post-title {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy-dark);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.post-title a:hover {
+  color: var(--gold);
+}
+
+.post-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.65;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-card-footer {
+  padding: 0 24px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.read-more {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap var(--transition);
+}
+.post-card:hover .read-more {
+  gap: 8px;
+}
+
+/* ============================
+   ABOUT STRIP
+============================ */
+.section-about-strip {
+  padding: 80px 0;
+  background: var(--parchment);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.about-strip-inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-strip-portrait {
+  width: 200px;
+  height: 240px;
+  border-radius: var(--radius-lg);
+  background: var(--navy);
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: var(--shadow);
+  border: 3px solid var(--gold-pale);
+}
+.about-strip-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-strip-portrait-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, var(--navy), var(--navy-light));
+  color: rgba(255,255,255,0.3);
+  font-size: 4rem;
+}
+
+.about-strip-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+.about-strip-title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  color: var(--navy-dark);
+  margin-bottom: 16px;
+}
+.about-strip-text {
+  color: var(--text-light);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+
+.about-highlights {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--navy);
+}
+.highlight-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ============================
+   ALL POSTS / BLOG PAGE
+============================ */
+.section-blog-hero {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+  padding: 60px 0;
+  text-align: center;
+}
+.blog-hero-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.blog-hero-sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.section-blog {
+  padding: 60px 0 80px;
+  background: var(--gray-50);
+}
+
+.blog-controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 240px;
+  position: relative;
+}
+.search-box input {
+  width: 100%;
+  padding: 12px 18px 12px 42px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-family: 'Heebo', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  transition: border-color var(--transition);
+  direction: rtl;
+}
+.search-box input:focus {
+  outline: none;
+  border-color: var(--navy);
+}
+.search-box svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-400);
+}
+
+.year-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.year-btn {
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gray-500);
+  background: var(--white);
+  border: 2px solid var(--border);
+  transition: all var(--transition);
+  font-family: 'Heebo', sans-serif;
+}
+.year-btn:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+.year-btn.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
+.posts-count {
+  font-size: 0.88rem;
+  color: var(--gray-400);
+  margin-bottom: 24px;
+}
+.posts-count span {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.blog-posts-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.post-list-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  padding: 28px;
+  transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.post-list-card:hover {
+  border-color: var(--navy-light);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.post-list-date {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  font-weight: 400;
+}
+.post-list-title {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--navy-dark);
+  line-height: 1.4;
+}
+.post-list-title a:hover { color: var(--gold); }
+
+.post-list-excerpt {
+  font-size: 0.92rem;
+  color: var(--text-light);
+  line-height: 1.65;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.post-list-read {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--gray-400);
+}
+.no-results svg { margin: 0 auto 16px; opacity: 0.4; }
+
+/* ============================
+   ABOUT PAGE
+============================ */
+.section-about-hero {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+  padding: 80px 0;
+}
+.about-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+  align-items: end;
+}
+.about-hero-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+.about-hero-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--white);
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+.about-hero-desc {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.75;
+  max-width: 580px;
+}
+.about-hero-portrait {
+  width: 200px;
+  height: 250px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 4px solid rgba(255,255,255,0.15);
+  box-shadow: var(--shadow-lg);
+  flex-shrink: 0;
+}
+.about-hero-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-hero-portrait-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.3);
+  font-size: 4rem;
+}
+
+.section-about-content {
+  padding: 72px 0;
+}
+.about-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 60px;
+  align-items: start;
+}
+.about-body h3 {
+  font-size: 1.4rem;
+  color: var(--navy-dark);
+  margin: 32px 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--gold-pale);
+}
+.about-body h3:first-child { margin-top: 0; }
+.about-body p {
+  color: var(--text-light);
+  line-height: 1.8;
+  font-size: 1.01rem;
+}
+
+.about-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.sidebar-card {
+  background: var(--parchment);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  border: 1px solid var(--border);
+}
+.sidebar-card-title {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy-dark);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--gold-pale);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sidebar-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.9rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.fact-item:last-child { border-bottom: none; padding-bottom: 0; }
+.fact-label { color: var(--gray-500); font-weight: 400; }
+.fact-value { font-weight: 600; color: var(--navy-dark); text-align: left; }
+
+/* ============================
+   QUOTE / HIGHLIGHT BOX
+============================ */
+.quote-box {
+  background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+}
+.quote-text {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.9);
+  max-width: 800px;
+  margin: 0 auto 20px;
+  font-style: italic;
+}
+.quote-text::before { content: '"'; color: var(--gold-light); font-size: 2em; line-height: 0; vertical-align: -0.4em; margin-left: 8px; }
+.quote-text::after  { content: '"'; color: var(--gold-light); font-size: 2em; line-height: 0; vertical-align: -0.4em; margin-right: 8px; }
+.quote-source {
+  font-size: 0.88rem;
+  color: var(--gold-light);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* ============================
+   SINGLE POST PAGE
+============================ */
+.section-post-hero {
+  background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+  padding: 60px 0 48px;
+}
+.post-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
+}
+.post-breadcrumb a { color: rgba(255,255,255,0.65); transition: color var(--transition); }
+.post-breadcrumb a:hover { color: var(--gold-light); }
+.post-hero-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--white);
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  max-width: 800px;
+}
+.post-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.6);
+  flex-wrap: wrap;
+}
+.post-hero-meta svg { opacity: 0.6; }
+
+.section-post-content {
+  padding: 64px 0 80px;
+}
+.post-content-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 60px;
+  align-items: start;
+}
+.post-featured-image {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  margin-bottom: 36px;
+  box-shadow: var(--shadow);
+}
+
+.post-body {
+  font-size: 1.06rem;
+  line-height: 1.85;
+  color: var(--text);
+}
+.post-body h2, .post-body h3 {
+  margin: 36px 0 16px;
+  color: var(--navy-dark);
+}
+.post-body p { margin-bottom: 1.4em; }
+.post-body blockquote {
+  border-right: 4px solid var(--gold);
+  padding: 16px 20px;
+  background: var(--parchment);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 24px 0;
+  font-style: italic;
+  color: var(--text-light);
+}
+
+.post-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 88px;
+}
+
+/* ============================
+   CONTACT PAGE
+============================ */
+.section-contact {
+  padding: 80px 0;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.contact-info h2 {
+  font-size: 1.8rem;
+  color: var(--navy-dark);
+  margin-bottom: 16px;
+}
+.contact-info p {
+  color: var(--text-light);
+  line-height: 1.75;
+  margin-bottom: 32px;
+}
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.contact-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius);
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+.contact-form {
+  background: var(--parchment);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  border: 1px solid var(--border);
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--navy-dark);
+  margin-bottom: 8px;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-family: 'Heebo', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  transition: border-color var(--transition);
+  direction: rtl;
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--navy);
+}
+.form-group textarea { min-height: 130px; }
+
+/* ============================
+   FOOTER
+============================ */
+.site-footer {
+  background: var(--navy-dark);
+  color: rgba(255,255,255,0.7);
+  padding: 60px 0 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-brand .logo-name { font-size: 1.4rem; margin-bottom: 6px; display: block; }
+.footer-brand p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin-top: 14px;
+  color: rgba(255,255,255,0.5);
+}
+
+.footer-col-title {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 18px;
+}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links a {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.55);
+  transition: color var(--transition);
+}
+.footer-links a:hover { color: var(--gold-light); }
+
+.footer-bottom {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.35);
+}
+.footer-gold { color: var(--gold-light); }
+
+/* ============================
+   LOADING / PAGINATION
+============================ */
+.load-more-wrap {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 48px;
+}
+.page-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-500);
+  background: var(--white);
+  border: 2px solid var(--border);
+  transition: all var(--transition);
+  font-family: 'Heebo', sans-serif;
+}
+.page-btn:hover { border-color: var(--navy); color: var(--navy); }
+.page-btn.active { background: var(--navy); border-color: var(--navy); color: white; }
+
+/* ============================
+   UTILITIES
+============================ */
+.text-center { text-align: center; }
+.mt-4 { margin-top: 16px; }
+.mt-8 { margin-top: 32px; }
+.mb-4 { margin-bottom: 16px; }
+.hidden { display: none; }
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-portrait { display: none; }
+  .hero-stats { gap: 20px; }
+
+  .about-strip-inner { grid-template-columns: 1fr; }
+  .about-strip-portrait { width: 120px; height: 150px; }
+
+  .posts-grid { grid-template-columns: 1fr 1fr; }
+  .blog-posts-list { grid-template-columns: 1fr; }
+
+  .about-content-grid { grid-template-columns: 1fr; }
+  .about-hero-inner { grid-template-columns: 1fr; }
+  .about-hero-portrait { display: none; }
+
+  .post-content-layout { grid-template-columns: 1fr; }
+  .post-sidebar { position: static; }
+
+  .contact-grid { grid-template-columns: 1fr; }
+
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .header-inner { }
+  .site-nav { display: none; flex-direction: column; position: absolute; top: 68px; right: 0; left: 0; background: var(--navy-dark); padding: 16px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .site-nav.open { display: flex; }
+  .nav-toggle { display: flex; }
+
+  .posts-grid { grid-template-columns: 1fr; }
+  .hero-stats { flex-wrap: wrap; gap: 16px; }
+  .hero-actions { flex-direction: column; }
+  .blog-controls { flex-direction: column; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+}
+
+/* ============================
+   ANIMATIONS
+============================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up { animation: fadeInUp 0.5s ease forwards; }
+
+.post-card, .post-list-card {
+  animation: fadeInUp 0.4s ease backwards;
+}

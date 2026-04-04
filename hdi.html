@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>המכון החרדי לדמוקרטיה — בצלאל כהן</title>
+  <meta name="description" content="המכון החרדי לדמוקרטיה (HDI) — חיבור בין אורח חיים חרדי לדמוקרטיה, הומניזם ואחריות אזרחית." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .hdi-hero {
+      background: linear-gradient(135deg, #0c4a3e 0%, #1a6b5a 50%, #1a3557 100%);
+      padding: 80px 0 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hdi-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hdi-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,200,50,0.15);
+      border: 1px solid rgba(255,200,50,0.3);
+      color: #ffd966;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+    }
+    .hdi-green { color: #2ecc71; }
+    .hdi-section { padding: 72px 0; }
+    .hdi-section-alt { padding: 72px 0; background: var(--parchment); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .mission-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all var(--transition);
+    }
+    .mission-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+    .mission-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 1.6rem;
+    }
+    .mission-card h4 {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.1rem;
+      color: var(--navy-dark);
+      margin-bottom: 10px;
+    }
+    .mission-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .team-card {
+      text-align: center;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px 24px;
+      border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    .team-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+    .team-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-family: 'Frank Ruhl Libre', serif;
+      font-weight: 700;
+      color: white;
+    }
+    .team-name {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 4px;
+    }
+    .team-role {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .team-bio {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+    .team-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+      background: rgba(26,53,87,0.06);
+      padding: 6px 14px;
+      border-radius: 100px;
+      direction: ltr;
+    }
+
+    .values-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .value-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+    }
+    .value-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0c4a3e, #1a6b5a);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .value-item h4 {
+      font-size: 0.95rem;
+      color: var(--navy-dark);
+      margin-bottom: 4px;
+    }
+    .value-item p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .hdi-cta-box {
+      background: linear-gradient(135deg, #0c4a3e, #1a6b5a);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      text-align: center;
+      color: white;
+    }
+    .hdi-cta-box h2 { color: white; margin-bottom: 14px; }
+    .hdi-cta-box p { color: rgba(255,255,255,0.75); margin-bottom: 28px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+    @media (max-width: 900px) {
+      .mission-grid, .team-grid { grid-template-columns: 1fr; }
+      .values-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo">
+          <span class="logo-name">בצלאל כהן</span>
+          <span class="logo-sub">בתוך עמי</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html">דף הבית</a>
+          <a href="blog.html">בלוג</a>
+          <a href="about.html">אודות</a>
+          <a href="hdi.html" class="active">המכון לדמוקרטיה</a>
+          <a href="podcast.html">פודקאסט</a>
+          <a href="contact.html" class="nav-cta">צור קשר</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="תפריט">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hdi-hero">
+    <div class="container" style="position:relative; z-index:1;">
+      <div style="max-width: 700px;">
+        <div class="hdi-badge">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="6"/></svg>
+          Haredi Institute for Democracy
+        </div>
+        <h1 style="font-size:clamp(2.2rem,5vw,3.5rem); font-weight:900; color:white; line-height:1.15; margin-bottom:8px;">
+          המכון החרדי<br/><span style="color:#ffd966;">לדמוקרטיה</span>
+        </h1>
+        <p style="font-size:clamp(1rem,2vw,1.2rem); color:rgba(255,255,255,0.72); line-height:1.7; margin-bottom:28px; max-width:580px;">
+          חרדים לישראל ולדמוקרטיה — בית ומרחב פיתוח לגישה המחברת בין אורח חיים חרדי לדמוקרטיה, הומניזם ואחריות אזרחית משותפת.
+        </p>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="https://www.hdi.org.il/" target="_blank" class="btn btn-primary">לאתר המכון</a>
+          <a href="#about-hdi" class="btn btn-outline">למידע נוסף</a>
+        </div>
+        <div style="display:flex; gap:32px; margin-top:36px; padding-top:32px; border-top:1px solid rgba(255,255,255,0.12);">
+          <div class="stat-item">
+            <span class="stat-num" style="color:#ffd966;">HDI</span>
+            <span class="stat-label">Haredi Institute for Democracy</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" style="color:#ffd966;">2023</span>
+            <span class="stat-label">שנת הקמה</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" style="color:#ffd966;">3</span>
+            <span class="stat-label">מנהלים שותפים</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="hdi-section" id="about-hdi">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" style="color:#1a6b5a;">אודות המכון</span>
+        <h2 class="section-title">חיבור בין עולמות</h2>
+        <div class="section-divider" style="background:linear-gradient(90deg,#0c4a3e,#1a6b5a);"></div>
+      </div>
+
+      <div style="max-width:800px; margin:0 auto;">
+        <p style="font-size:1.05rem; color:var(--text-light); line-height:1.85; text-align:center; margin-bottom:24px;">
+          המכון החרדי לדמוקרטיה שואף להיות בית ומרחב פיתוח לגישה המחברת בין אורח חיים חרדי לאורח חיים המיישם תפיסה אזרחית, הומניזם, דמוקרטיה וליברליזם.
+        </p>
+        <p style="font-size:1.05rem; color:var(--text-light); line-height:1.85; text-align:center;">
+          המכון הוקם על ידי <strong style="color:var(--navy-dark);">הרב בצלאל כהן</strong> ו<strong style="color:var(--navy-dark);">מיכל גלבוע-אטר</strong>, מתוך אמונה שיש לרעיון זה כוח רב, התכנות ומשמעות לעתידה של החברה הישראלית.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION AREAS -->
+  <section class="hdi-section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" style="color:#1a6b5a;">תחומי פעילות</span>
+        <h2 class="section-title">מה עושה המכון?</h2>
+        <div class="section-divider" style="background:linear-gradient(90deg,#0c4a3e,#1a6b5a);"></div>
+      </div>
+
+      <div class="mission-grid">
+        <div class="mission-card">
+          <div class="mission-icon" style="background:rgba(26,107,90,0.1);">📜</div>
+          <h4>שפה תורנית-אזרחית</h4>
+          <p>פיתוח שפה תורנית המחברת בין עולם התורה לתפיסות דמוקרטיות והומניסטיות — באופן נגיש לקהילה החרדית.</p>
+        </div>
+        <div class="mission-card">
+          <div class="mission-icon" style="background:rgba(26,107,90,0.1);">🤝</div>
+          <h4>גיבוש קהילה</h4>
+          <p>גיבוש קהילה חרדית דמוקרטית והפצת תכנים בקרב אנשי חינוך, מנהיגות תורנית ופוליטית, יזמים חברתיים והקהל הרחב.</p>
+        </div>
+        <div class="mission-card">
+          <div class="mission-icon" style="background:rgba(26,107,90,0.1);">🌉</div>
+          <h4>גישור בין חברות</h4>
+          <p>מפגש בין גורמים וקהילות בחברה החרדית לגורמים בכלל החברה הישראלית — ליצירת שיתופי פעולה ואחריות משותפת.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="hdi-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" style="color:#1a6b5a;">ערכי יסוד</span>
+        <h2 class="section-title">עקרונות מנחים</h2>
+        <div class="section-divider" style="background:linear-gradient(90deg,#0c4a3e,#1a6b5a);"></div>
+      </div>
+
+      <div class="values-list">
+        <div class="value-item">
+          <div class="value-num">1</div>
+          <div>
+            <h4>אורח חיים חרדי</h4>
+            <p>שמירה על הזהות החרדית, אורח החיים והאמונה — כבסיס לכל פעילות.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">2</div>
+          <div>
+            <h4>דמוקרטיה</h4>
+            <p>אמונה בערכי הדמוקרטיה כמסגרת לחיים משותפים בחברה מגוונת.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">3</div>
+          <div>
+            <h4>הומניזם</h4>
+            <p>כבוד האדם, ערך חיי אדם, ואחריות אזרחית כלפי כלל החברה.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">4</div>
+          <div>
+            <h4>אחריות משותפת</h4>
+            <p>שיתוף פעולה בין הקהילה החרדית לכלל החברה הישראלית למען עתיד משותף.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">5</div>
+          <div>
+            <h4>ליברליזם</h4>
+            <p>חופש הפרט, סובלנות ופתיחות כלפי עמדות שונות בתוך ומחוץ לקהילה.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">6</div>
+          <div>
+            <h4>שפה תורנית</h4>
+            <p>חיבור בין ערכים אזרחיים לשפה ולמקורות התורניים — לנגישות מקסימלית.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="hdi-section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" style="color:#1a6b5a;">הצוות</span>
+        <h2 class="section-title">מי אנחנו</h2>
+        <div class="section-divider" style="background:linear-gradient(90deg,#0c4a3e,#1a6b5a);"></div>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar" style="background:linear-gradient(135deg, var(--navy-dark), var(--navy));">ב</div>
+          <div class="team-name">הרב בצלאל כהן</div>
+          <span class="team-role">מייסד — מנכ"ל שותף</span>
+          <p class="team-bio">
+            ראש בית המדרש "אנשי חיל" למנהיגות תורנית, מייסד ישיבת "חכמי לב", פעיל ויזם חברתי לשילוב חרדים בתעסוקה, באקדמיה ובצבא, ובעל ניסיון רב בדיאלוג בין הקהילה החרדית לחברה הישראלית.
+          </p>
+          <span class="team-phone">050-652-8937</span>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar" style="background:linear-gradient(135deg, #5b2c8a, #7b3faf);">מ</div>
+          <div class="team-name">מיכל גלבוע אטר</div>
+          <span class="team-role">מייסדת — מנכ"לית שותפה</span>
+          <p class="team-bio">
+            עוסקת שני עשורים בקידום תרבות דמוקרטית בהיבטים חינוכיים וחברתיים. שימשה מנכ"לית "המכון הדמוקרטי" במשך 8 שנים. כיום מנכ"לית ארגון "ילדותא" לקידום הגיל הרך בתפיסה הומניסטית דמוקרטית.
+          </p>
+          <span class="team-phone">052-395-4030</span>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar" style="background:linear-gradient(135deg, #0c4a3e, #1a6b5a);">מ</div>
+          <div class="team-name">מלכי רוטנר</div>
+          <span class="team-role">מנכ"לית שותפה</span>
+          <p class="team-bio">
+            יזמת חברתית לחיזוק מקומן של נשים חרדיות בעולמות הרוח והיהדות. מייסדת תוכנית "לכתחילה" להגות חרדית עכשווית. לשעבר ראש תחום חברה חרדית במכון שחרית. בוגרת תואר שני במגדר (בר אילן).
+          </p>
+          <span class="team-phone">058-762-9820</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-box" style="background: linear-gradient(135deg, #0c4a3e, #1a6b5a);">
+    <div class="container--narrow">
+      <p class="quote-text">
+        אנו מאמינים שיש לרעיון זה, כמו גם לשיתוף הפעולה בינינו, כוח רב, התכנות ומשמעות לעתידה של החברה הישראלית.
+      </p>
+      <div class="quote-source">הרב בצלאל כהן ומיכל גלבוע אטר — מייסדי המכון</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="hdi-section">
+    <div class="container">
+      <div class="hdi-cta-box">
+        <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);">רוצים לדעת עוד?</h2>
+        <p>בקרו באתר הרשמי של המכון החרדי לדמוקרטיה או צרו קשר ישיר עם הצוות.</p>
+        <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+          <a href="https://www.hdi.org.il/" target="_blank" class="btn btn-primary" style="background:#ffd966; color:#0c4a3e; border-color:#ffd966;">לאתר המכון</a>
+          <a href="contact.html" class="btn btn-outline">צור קשר</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo-name" style="font-family:'Frank Ruhl Libre',serif; color:white; font-size:1.4rem;">בצלאל כהן</span>
+          <span class="logo-sub" style="color:var(--gold-light); font-size:0.75rem; letter-spacing:0.06em; display:block; margin-top:4px;">בתוך עמי</span>
+          <p>מחשבות על החברה החרדית, חינוך, מנהיגות ועתיד יהדות ישראל.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">ניווט</div>
+          <div class="footer-links">
+            <a href="index.html">דף הבית</a>
+            <a href="blog.html">בלוג</a>
+            <a href="about.html">אודות</a>
+            <a href="hdi.html">המכון לדמוקרטיה</a>
+            <a href="contact.html">צור קשר</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">קישורים</div>
+          <div class="footer-links">
+            <a href="https://www.hdi.org.il/" target="_blank">אתר HDI</a>
+            <a href="https://betochami.blogspot.com/" target="_blank">בלוג בתוך עמי</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 בצלאל כהן. כל הזכויות שמורות.</span>
+        <span>נבנה באהבה <span class="footer-gold">♦</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

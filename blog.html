@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>בלוג — בצלאל כהן</title>
+  <meta name="description" content="כל המאמרים של בצלאל כהן על החברה החרדית, חינוך, גיוס ומנהיגות תורנית." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo">
+          <span class="logo-name">בצלאל כהן</span>
+          <span class="logo-sub">בתוך עמי</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html">דף הבית</a>
+          <a href="blog.html" class="active">בלוג</a>
+          <a href="about.html">אודות</a>
+          <a href="hdi.html">המכון לדמוקרטיה</a>
+          <a href="podcast.html">פודקאסט</a>
+          <a href="contact.html" class="nav-cta">צור קשר</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="תפריט">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== BLOG HERO ===== -->
+  <section class="section-blog-hero">
+    <div class="container">
+      <p class="blog-hero-sub" style="margin-bottom:10px; font-size:0.82rem; font-weight:700; letter-spacing:0.1em; color:var(--gold-light); text-transform:uppercase;">ארכיון</p>
+      <h1 class="blog-hero-title">הבלוג — בתוך עמי</h1>
+      <p class="blog-hero-sub">למעלה מ-170 מאמרים על החברה החרדית — מ-2003 ועד היום</p>
+    </div>
+  </section>
+
+  <!-- ===== BLOG CONTENT ===== -->
+  <section class="section-blog">
+    <div class="container">
+
+      <!-- Controls -->
+      <div class="blog-controls">
+        <div class="search-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="searchInput" placeholder="חיפוש מאמרים..." />
+        </div>
+        <div class="year-filters" id="yearFilters">
+          <button class="year-btn active" data-year="all">הכל</button>
+          <!-- Years populated by JS -->
+        </div>
+      </div>
+
+      <!-- Count -->
+      <p class="posts-count" id="postsCount">מציג <span id="countNum">0</span> מאמרים</p>
+
+      <!-- Posts Grid -->
+      <div class="blog-posts-list" id="blogPostsList">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination"></div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo-name" style="font-family:'Frank Ruhl Libre',serif; color:white; font-size:1.4rem;">בצלאל כהן</span>
+          <span class="logo-sub" style="color:var(--gold-light); font-size:0.75rem; letter-spacing:0.06em; display:block; margin-top:4px;">בתוך עמי</span>
+          <p>מחשבות על החברה החרדית, חינוך, מנהיגות ועתיד יהדות ישראל.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">ניווט</div>
+          <div class="footer-links">
+            <a href="index.html">דף הבית</a>
+            <a href="blog.html">בלוג</a>
+            <a href="about.html">אודות</a>
+            <a href="contact.html">צור קשר</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">נושאים</div>
+          <div class="footer-links">
+            <a href="#">חינוך חרדי</a>
+            <a href="#">גיוס חרדים</a>
+            <a href="#">מנהיגות תורנית</a>
+            <a href="#">שילוב חרדי</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 בצלאל כהן. כל הזכויות שמורות.</span>
+        <span>נבנה באהבה <span class="footer-gold">♦</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/posts-data.js"></script>
+  <script src="js/blog.js"></script>
+</body>
+</html>
