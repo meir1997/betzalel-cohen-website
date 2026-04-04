@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>מאמר — בצלאל כהן</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .post-body-content {
+      font-size: 1.08rem;
+      line-height: 2;
+      color: var(--text);
+      max-width: 760px;
+    }
+    .post-body-content p {
+      margin-bottom: 1.5em;
+      text-align: justify;
+    }
+    .post-nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 2px solid var(--border);
+    }
+    .post-nav-link {
+      flex: 1;
+      padding: 20px;
+      background: var(--gray-50);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    .post-nav-link:hover {
+      border-color: var(--navy);
+      background: var(--parchment);
+    }
+    .post-nav-label {
+      font-size: 0.78rem;
+      color: var(--gray-400);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .post-nav-title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      line-height: 1.4;
+    }
+    .post-nav-link.next { text-align: left; }
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 32px;
+      padding: 14px 24px;
+      background: var(--parchment);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      color: var(--navy);
+      font-weight: 600;
+      transition: all var(--transition);
+    }
+    .source-link:hover {
+      background: var(--gold-pale);
+      border-color: var(--gold);
+    }
+    @media (max-width: 700px) {
+      .post-nav-bottom { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo">
+          <span class="logo-name">בצלאל כהן</span>
+          <span class="logo-sub">בתוך עמי</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html">דף הבית</a>
+          <a href="blog.html">בלוג</a>
+          <a href="about.html">אודות</a>
+          <a href="hdi.html">המכון לדמוקרטיה</a>
+          <a href="podcast.html">פודקאסט</a>
+          <a href="contact.html" class="nav-cta">צור קשר</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="תפריט">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- POST HERO -->
+  <section class="section-post-hero">
+    <div class="container--narrow">
+      <div class="post-breadcrumb">
+        <a href="index.html">דף הבית</a>
+        <span>/</span>
+        <a href="blog.html">בלוג</a>
+        <span>/</span>
+        <span id="breadcrumbYear"></span>
+      </div>
+      <h1 class="post-hero-title" id="postTitle">טוען...</h1>
+      <div class="post-hero-meta">
+        <span id="postDate"></span>
+        <span>•</span>
+        <span>בצלאל כהן</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- POST CONTENT -->
+  <section style="padding: 56px 0 80px;">
+    <div class="container--narrow">
+      <div class="post-body-content" id="postContent">
+        <p>טוען תוכן...</p>
+      </div>
+
+      <a id="sourceLink" href="#" target="_blank" class="source-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        קרא את המקור בבלוג המקורי
+      </a>
+
+      <!-- Nav to prev/next -->
+      <div class="post-nav-bottom" id="postNav"></div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo-name" style="font-family:'Frank Ruhl Libre',serif; color:white; font-size:1.4rem;">בצלאל כהן</span>
+          <span class="logo-sub" style="color:var(--gold-light); font-size:0.75rem; letter-spacing:0.06em; display:block; margin-top:4px;">בתוך עמי</span>
+          <p>מחשבות על החברה החרדית, חינוך, מנהיגות ועתיד יהדות ישראל.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">ניווט</div>
+          <div class="footer-links">
+            <a href="index.html">דף הבית</a>
+            <a href="blog.html">בלוג</a>
+            <a href="about.html">אודות</a>
+            <a href="hdi.html">המכון לדמוקרטיה</a>
+            <a href="podcast.html">פודקאסט</a>
+            <a href="contact.html">צור קשר</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">קישורים</div>
+          <div class="footer-links">
+            <a href="https://www.hdi.org.il/" target="_blank">אתר HDI</a>
+            <a href="https://betochami.blogspot.com/" target="_blank">בלוג בתוך עמי</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 בצלאל כהן. כל הזכויות שמורות.</span>
+        <span>נבנה באהבה <span class="footer-gold">♦</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/posts-data.js"></script>
+  <script>
+    // Mobile nav
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('siteNav').classList.toggle('open');
+    });
+
+    // Date formatter
+    function formatDate(dateStr) {
+      const months = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+      const d = new Date(dateStr);
+      return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+    }
+
+    // Get post ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const postId = parseInt(params.get('id'));
+
+    if (!isNaN(postId) && POSTS[postId]) {
+      const post = POSTS[postId];
+
+      // Update page
+      document.title = post.title + ' — בצלאל כהן';
+      document.getElementById('postTitle').textContent = post.title;
+      document.getElementById('postDate').textContent = formatDate(post.date);
+      document.getElementById('breadcrumbYear').textContent = post.year;
+      document.getElementById('sourceLink').href = post.url;
+
+      // Content — use full content if available, otherwise use excerpt
+      const content = post.content || post.excerpt;
+      const paragraphs = content.split('\n').filter(p => p.trim());
+      document.getElementById('postContent').innerHTML = paragraphs.map(p => '<p>' + p + '</p>').join('');
+
+      // Prev / Next navigation
+      const navEl = document.getElementById('postNav');
+      let html = '';
+      if (postId > 0) {
+        const prev = POSTS[postId - 1];
+        html += '<a href="post.html?id=' + (postId - 1) + '" class="post-nav-link prev"><span class="post-nav-label">→ המאמר הקודם</span><span class="post-nav-title">' + prev.title + '</span></a>';
+      }
+      if (postId < POSTS.length - 1) {
+        const next = POSTS[postId + 1];
+        html += '<a href="post.html?id=' + (postId + 1) + '" class="post-nav-link next"><span class="post-nav-label">המאמר הבא ←</span><span class="post-nav-title">' + next.title + '</span></a>';
+      }
+      navEl.innerHTML = html;
+    } else {
+      document.getElementById('postTitle').textContent = 'מאמר לא נמצא';
+      document.getElementById('postContent').innerHTML = '<p>המאמר המבוקש לא נמצא. <a href="blog.html">חזרה לבלוג</a></p>';
+    }
+  </script>
+</body>
+</html>

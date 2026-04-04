@@ -86,14 +86,16 @@ function render() {
           <p>נסה חיפוש אחר או סינון שנה אחרת</p>
         </div>`;
     } else {
-      listEl.innerHTML = pageItems.map((p, i) => `
+      listEl.innerHTML = pageItems.map((p, i) => {
+        const idx = POSTS.indexOf(p);
+        return `
         <div class="post-list-card" style="animation-delay:${i * 0.05}s">
           <span class="post-list-date">${formatDate(p.date)}</span>
-          <h3 class="post-list-title"><a href="${p.url}" target="_blank">${p.title}</a></h3>
+          <h3 class="post-list-title"><a href="post.html?id=${idx}">${p.title}</a></h3>
           <p class="post-list-excerpt">${p.excerpt}</p>
-          <a href="${p.url}" target="_blank" class="post-list-read">קרא עוד ←</a>
-        </div>
-      `).join('');
+          <a href="post.html?id=${idx}" class="post-list-read">קרא עוד ←</a>
+        </div>`;
+      }).join('');
     }
   }
 
