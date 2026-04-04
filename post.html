@@ -219,11 +219,26 @@
     async function fetchFullContent(post) {
       const contentEl = document.getElementById('postContent');
       try {
-        // Use CORS proxy to fetch the blog post HTML
-        const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(post.url);
-        const response = await fetch(proxyUrl);
-        if (!response.ok) throw new Error('Proxy fetch failed');
-        const html = await response.text();
+        // Try multiple CORS proxies as fallback
+        const proxies = [
+          'https://corsproxy.io/?' + encodeURIComponent(post.url),
+          'https://api.allorigins.win/raw?url=' + encodeURIComponent(post.url),
+          'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(post.url)
+        ];
+        let html = null;
+        for (const proxyUrl of proxies) {
+          try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 8000);
+            const response = await fetch(proxyUrl, { signal: controller.signal });
+            clearTimeout(timeout);
+            if (response.ok) {
+              html = await response.text();
+              if (html && html.length > 500) break;
+            }
+          } catch (e) { continue; }
+        }
+        if (!html) throw new Error('All proxies failed');
 
         // Parse the HTML and extract the post body
         const parser = new DOMParser();
