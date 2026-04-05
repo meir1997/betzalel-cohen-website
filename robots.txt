@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bezalelcohen.co.il/sitemap.xml
