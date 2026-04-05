@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tagFiltersEl = document.getElementById('tagFilters');
   if (tagFiltersEl) {
     tagFiltersEl.innerHTML =
-      '<button class="year-btn active" data-tag="all" style="border-color:var(--gold);">הכל</button>' +
+      '<button class="year-btn active" data-tag="all" style="border-color:var(--navy);background:var(--navy);color:white;">הכל</button>' +
       sortedTags.map(([tag, count]) =>
         '<button class="year-btn" data-tag="' + tag + '" style="border-color:var(--gold);">' + tag + ' <span style="font-size:0.75rem;color:var(--gray-400);">(' + count + ')</span></button>'
       ).join('');
@@ -34,8 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     tagFiltersEl.addEventListener('click', e => {
       const btn = e.target.closest('[data-tag]');
       if (!btn) return;
-      tagFiltersEl.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
+      tagFiltersEl.querySelectorAll('.year-btn').forEach(b => {
+        b.classList.remove('active');
+        b.style.cssText = 'border-color:var(--gold);';
+      });
       btn.classList.add('active');
+      btn.style.cssText = 'border-color:var(--navy);background:var(--navy);color:white;';
       currentTag = btn.dataset.tag;
       currentPage = 1;
       render();
@@ -82,7 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
       tagFiltersEl.querySelectorAll('.year-btn').forEach(b => {
         const isMatch = b.dataset.tag === tagParam;
         b.classList.toggle('active', isMatch);
-        if (isMatch) b.style.cssText = 'border-color:var(--gold);';
+        b.style.cssText = isMatch
+          ? 'border-color:var(--navy);background:var(--navy);color:white;'
+          : 'border-color:var(--gold);';
       });
     }
   }
