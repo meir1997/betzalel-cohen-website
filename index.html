@@ -274,19 +274,81 @@
     </div>
   </section>
 
-  <!-- ===== RECENT POSTS LIST ===== -->
-  <section style="padding: 72px 0;">
+  <!-- ===== PODCAST STRIP ===== -->
+  <section style="padding: 72px 0; background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%); color: white;">
     <div class="container">
-      <div class="section-header">
-        <span class="section-label">פוסטים אחרונים</span>
-        <h2 class="section-title">המשך לקרוא</h2>
-        <div class="section-divider"></div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items:center;">
+        <div>
+          <span style="font-size:0.78rem; font-weight:700; letter-spacing:0.1em; color:#fc8181; text-transform:uppercase; display:block; margin-bottom:12px;">פודקאסט</span>
+          <h2 style="font-family:'Frank Ruhl Libre',serif; font-size:clamp(1.5rem,3vw,2.2rem); color:white; margin-bottom:6px;">חרדים למדינה</h2>
+          <p style="font-family:'Frank Ruhl Libre',serif; font-size:1.1rem; color:#fc8181; margin-bottom:16px;">סיפור משותף</p>
+          <p style="color:rgba(255,255,255,0.7); line-height:1.75; margin-bottom:24px;">
+            פודקאסט מבית המכון החרדי לדמוקרטיה. דיאלוג בין הקול החילוני-אזרחי של מיכל גלבוע אטר לבין הקול התורני-ממלכתי של הרב בצלאל כהן. 11 פרקים, עונה ראשונה.
+          </p>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a href="podcast.html" class="btn" style="background:#e53e3e; color:white; border-color:#e53e3e;">לכל הפרקים</a>
+            <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="btn btn-outline">צפו ביוטיוב</a>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <a href="podcast.html" style="background:rgba(255,255,255,0.08); border-radius:12px; padding:16px 20px; display:flex; align-items:center; gap:14px; text-decoration:none; color:white; transition: background 0.2s;">
+            <div style="width:40px;height:40px;border-radius:50%;background:#e53e3e;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700; font-size:0.92rem;">פרק 8 — "לא יצאתי בשאלה, יצאתי עם תשובה"</div>
+              <div style="font-size:0.78rem; color:rgba(255,255,255,0.5);">עם איילת קרויזר · 52:10</div>
+            </div>
+          </a>
+          <a href="podcast.html" style="background:rgba(255,255,255,0.08); border-radius:12px; padding:16px 20px; display:flex; align-items:center; gap:14px; text-decoration:none; color:white; transition: background 0.2s;">
+            <div style="width:40px;height:40px;border-radius:50%;background:#e53e3e;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700; font-size:0.92rem;">פרק 7 — אישה חרדית בלב המחנה הליברלי</div>
+              <div style="font-size:0.78rem; color:rgba(255,255,255,0.5);">עם ציפי לביא · 37:56</div>
+            </div>
+          </a>
+          <a href="podcast.html" style="background:rgba(255,255,255,0.08); border-radius:12px; padding:16px 20px; display:flex; align-items:center; gap:14px; text-decoration:none; color:white; transition: background 0.2s;">
+            <div style="width:40px;height:40px;border-radius:50%;background:#e53e3e;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700; font-size:0.92rem;">פרק 6 — יהדות בכפיה עובדת?</div>
+              <div style="font-size:0.78rem; color:rgba(255,255,255,0.5);">עם ד"ר אוהד וייגלר · 35:11</div>
+            </div>
+          </a>
+        </div>
       </div>
-      <div class="blog-posts-list" id="recentPostsList">
-        <!-- Populated by JS -->
-      </div>
-      <div class="text-center mt-8">
-        <a href="blog.html" class="btn btn-navy">לארכיון המלא</a>
+    </div>
+  </section>
+
+  <!-- ===== HDI STRIP ===== -->
+  <section style="padding: 72px 0; background: linear-gradient(135deg, #0c4a3e 0%, #1a6b5a 100%); color: white;">
+    <div class="container">
+      <div style="display:grid; grid-template-columns: 1fr auto; gap: 48px; align-items:center;">
+        <div>
+          <span style="font-size:0.78rem; font-weight:700; letter-spacing:0.1em; color:#ffd966; text-transform:uppercase; display:block; margin-bottom:12px;">המכון החרדי לדמוקרטיה</span>
+          <h2 style="font-family:'Frank Ruhl Libre',serif; font-size:clamp(1.5rem,3vw,2.2rem); color:white; margin-bottom:16px;">חרדים לישראל ולדמוקרטיה</h2>
+          <p style="color:rgba(255,255,255,0.75); line-height:1.75; margin-bottom:16px; max-width:600px;">
+            בית ומרחב פיתוח לגישה המחברת בין אורח חיים חרדי לדמוקרטיה, הומניזם ואחריות אזרחית משותפת. המכון הוקם על ידי הרב בצלאל כהן ומיכל גלבוע-אטר.
+          </p>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a href="hdi.html" class="btn" style="background:#ffd966; color:#0c4a3e; border-color:#ffd966; font-weight:700;">למידע נוסף</a>
+            <a href="https://www.hdi.org.il/" target="_blank" class="btn btn-outline">לאתר המכון</a>
+          </div>
+        </div>
+        <div style="display:flex; gap:16px;">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.2);">
+            <img src="images/betzalel-cohen.jpg" alt="בצלאל כהן" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.2);">
+            <img src="images/michal.jpg" alt="מיכל גלבוע אטר" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.2);">
+            <img src="images/malki.jpg" alt="מלכי רוטנר" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+        </div>
       </div>
     </div>
   </section>
