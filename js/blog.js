@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tagFiltersEl = document.getElementById('tagFilters');
   if (tagFiltersEl) {
     tagFiltersEl.innerHTML =
-      '<button class="year-btn active" data-tag="all" style="border-color:var(--gold);color:var(--navy);">הכל</button>' +
+      '<button class="year-btn active" data-tag="all" style="border-color:var(--gold);">הכל</button>' +
       sortedTags.map(([tag, count]) =>
         '<button class="year-btn" data-tag="' + tag + '" style="border-color:var(--gold);">' + tag + ' <span style="font-size:0.75rem;color:var(--gray-400);">(' + count + ')</span></button>'
       ).join('');
