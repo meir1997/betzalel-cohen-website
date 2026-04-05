@@ -47,16 +47,23 @@
   <section class="section-blog">
     <div class="container">
 
-      <!-- Controls -->
+      <!-- Search -->
       <div class="blog-controls">
         <div class="search-box">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           <input type="text" id="searchInput" placeholder="חיפוש מאמרים..." />
         </div>
-        <div class="year-filters" id="yearFilters">
-          <button class="year-btn active" data-year="all">הכל</button>
-          <!-- Years populated by JS -->
-        </div>
+      </div>
+
+      <!-- Tags -->
+      <div id="tagFilters" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Years -->
+      <div class="year-filters" id="yearFilters" style="margin-bottom:16px;">
+        <button class="year-btn active" data-year="all">הכל</button>
+        <!-- Years populated by JS -->
       </div>
 
       <!-- Count -->
