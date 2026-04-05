@@ -80,12 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
     currentTag = tagParam;
     if (tagFiltersEl) {
       tagFiltersEl.querySelectorAll('.year-btn').forEach(b => {
-        b.classList.toggle('active', b.dataset.tag === tagParam);
+        const isMatch = b.dataset.tag === tagParam;
+        b.classList.toggle('active', isMatch);
+        if (isMatch) b.style.cssText = 'border-color:var(--gold);';
       });
     }
   }
 
   render();
+
+  if (tagParam && tagFiltersEl) {
+    tagFiltersEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 });
 
 function getFiltered() {
