@@ -73,6 +73,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Handle ?tag= URL parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const tagParam = urlParams.get('tag');
+  if (tagParam) {
+    currentTag = tagParam;
+    if (tagFiltersEl) {
+      tagFiltersEl.querySelectorAll('.year-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.tag === tagParam);
+      });
+    }
+  }
+
   render();
 });
 
