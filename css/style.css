@@ -666,9 +666,9 @@ p:last-child { margin-bottom: 0; }
   color: var(--navy);
 }
 .year-btn.active {
-  background: var(--navy);
-  border-color: var(--navy);
-  color: var(--white);
+  background: var(--navy) !important;
+  border-color: var(--navy) !important;
+  color: var(--white) !important;
 }
 
 .posts-count {
