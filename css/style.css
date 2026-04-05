@@ -69,7 +69,7 @@ h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; }
 h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 500; }
 h4 { font-size: 1.1rem; font-weight: 600; }
 
-p { margin-bottom: 1.2em; }
+p { margin-bottom: 1.2em; text-align: justify; }
 p:last-child { margin-bottom: 0; }
 
 /* ---- Layout ---- */
@@ -1078,6 +1078,7 @@ p:last-child { margin-bottom: 0; }
   line-height: 1.7;
   margin-top: 14px;
   color: rgba(255,255,255,0.5);
+  text-align: right;
 }
 
 .footer-col-title {
