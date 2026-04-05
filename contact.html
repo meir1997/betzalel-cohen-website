@@ -95,7 +95,11 @@
 
         <div class="contact-form">
           <h3 style="font-family:'Frank Ruhl Libre',serif; color:var(--navy-dark); font-size:1.3rem; margin-bottom:24px;">שליחת הודעה</h3>
-          <form id="contactForm" onsubmit="handleSubmit(event)">
+          <form id="contactForm" action="https://formsubmit.co/cobezal@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="פנייה חדשה מהאתר bezalelcohen.co.il">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://bezalelcohen.co.il/contact.html?sent=1">
+            <input type="text" name="_honey" style="display:none">
             <div class="form-group">
               <label for="name">שם מלא</label>
               <input type="text" id="name" name="name" placeholder="הכנס/י שם מלא" required />
@@ -176,8 +180,7 @@
 
   <script src="js/main.js"></script>
   <script>
-    function handleSubmit(e) {
-      e.preventDefault();
+    if (new URLSearchParams(window.location.search).get('sent') === '1') {
       document.getElementById('contactForm').style.display = 'none';
       document.getElementById('formSuccess').style.display = 'block';
     }
