@@ -233,12 +233,44 @@
       var contentEl = document.getElementById('postContent');
       var html = (typeof POST_CONTENT !== 'undefined') ? POST_CONTENT[post.url] : null;
 
+      // Fallback 1: try to find content by matching same year/month and title words
+      if (!html && typeof POST_CONTENT !== 'undefined') {
+        var match = post.url.match(/\/(\d{4})\/(\d{2})\//);
+        if (match) {
+          var yearMonth = '/' + match[1] + '/' + match[2] + '/';
+          var titleWords = (post.title || '').replace(/["'\\]/g, '').split(/\s+/).filter(function(w){ return w.length >= 3; });
+          var bestKey = null;
+          var bestScore = 0;
+          for (var key in POST_CONTENT) {
+            if (key.indexOf(yearMonth) === -1) continue;
+            var text = POST_CONTENT[key];
+            var score = 0;
+            for (var i = 0; i < titleWords.length; i++) {
+              if (text.indexOf(titleWords[i]) !== -1) score++;
+            }
+            if (score > bestScore) {
+              bestScore = score;
+              bestKey = key;
+            }
+          }
+          if (bestKey && bestScore >= Math.min(2, titleWords.length)) {
+            html = POST_CONTENT[bestKey];
+          }
+        }
+      }
+
       if (html) {
         contentEl.innerHTML = html;
         cleanupContent(contentEl);
       } else {
-        // Fallback to excerpt
-        contentEl.innerHTML = '<p>' + post.excerpt + '</p>';
+        // Final fallback: excerpt + link to original blog
+        var fallbackHtml = '<p>' + post.excerpt + '</p>';
+        if (post.url && post.url.indexOf('http') === 0) {
+          fallbackHtml += '<p style="margin-top:32px; padding:20px; background:var(--parchment); border-radius:var(--radius); border:1px solid var(--border);">' +
+            '<a href="' + post.url + '" target="_blank" style="color:var(--navy); font-weight:600; text-decoration:none;">' +
+            'קרא/י את המאמר המלא בבלוג המקורי ←</a></p>';
+        }
+        contentEl.innerHTML = fallbackHtml;
       }
     }
 
