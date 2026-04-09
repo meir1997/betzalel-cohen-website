@@ -112,6 +112,58 @@ def load_existing_metadata():
     return existing
 
 
+def load_static_posts():
+    """Load non-feed (static) posts from posts-data.js so they survive re-syncs.
+
+    Static posts are identified by a URL that is NOT a blogspot feed URL
+    (e.g. internal slugs like "calcalist-march-2026").
+    """
+    try:
+        with open(DATA_JS, "r", encoding="utf-8") as f:
+            raw = f.read()
+    except FileNotFoundError:
+        return [], {}
+
+    static_posts = []
+    image_re = r'(?:,\s*image:\s*"((?:[^"\\]|\\.)*)")?'
+    pattern = re.compile(
+        r'\{\s*year:\s*(\d+),\s*date:\s*"([^"]+)",\s*title:\s*"((?:[^"\\]|\\.)*)",'
+        r'\s*excerpt:\s*"((?:[^"\\]|\\.)*)",\s*url:\s*"([^"]+)",\s*tags:\s*\[([^\]]*)\]'
+        + image_re + r'\s*\}'
+    )
+    for m in pattern.finditer(raw):
+        url = m.group(5)
+        if url.startswith("http"):
+            continue
+        tags_raw = m.group(6)
+        tags = re.findall(r'"((?:[^"\\]|\\.)*)"', tags_raw)
+        static_posts.append({
+            "year": int(m.group(1)),
+            "date": m.group(2),
+            "title": m.group(3).replace('\\"', '"').replace('\\\\', '\\'),
+            "excerpt": m.group(4).replace('\\"', '"').replace('\\\\', '\\'),
+            "url": url,
+            "tags": [t.replace('\\"', '"') for t in tags],
+            "image": (m.group(7) or "").replace('\\"', '"'),
+        })
+
+    # Also pull their HTML content from posts-content.js
+    static_content = {}
+    try:
+        with open(CONTENT_JS, "r", encoding="utf-8") as f:
+            craw = f.read()
+        cm = re.search(r'const POST_CONTENT\s*=\s*(\{.*\})\s*;?\s*$', craw, re.DOTALL)
+        if cm:
+            all_content = json.loads(cm.group(1))
+            for p in static_posts:
+                if p["url"] in all_content:
+                    static_content[p["url"]] = all_content[p["url"]]
+    except FileNotFoundError:
+        pass
+
+    return static_posts, static_content
+
+
 def js_string(s):
     """Encode a Python string as a JS double-quoted string literal."""
     return json.dumps(s, ensure_ascii=False)
@@ -168,6 +220,9 @@ def main():
     existing_tags = load_existing_metadata()
     print(f"Existing posts with curated tags: {len(existing_tags)}", flush=True)
 
+    static_posts, static_content = load_static_posts()
+    print(f"Static (non-feed) posts preserved: {len(static_posts)}", flush=True)
+
     entries = fetch_all_entries()
     posts = []
     content_map = {}
@@ -180,6 +235,10 @@ def main():
             parsed["tags"] = existing_tags[parsed["url"]]
         posts.append(parsed)
         content_map[parsed["url"]] = html
+
+    # Merge in static (non-feed) posts
+    posts.extend(static_posts)
+    content_map.update(static_content)
 
     # Sort by date descending
     posts.sort(key=lambda p: p.get("date", ""), reverse=True)
