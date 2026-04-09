@@ -3,7 +3,6 @@
 
 const POSTS = [
   // ===== 2026 =====
-  { year: 2026, date: "2026-03-12", title: "הלכה של מדינה — ראיון עם בצלאל כהן", excerpt: "בצלאל כהן הוא המהפכן החרדי המוביל של דורנו, חלוץ בשילוב צעירים מהמגזר בעבודה ובאקדמיה. עכשיו הוא יוצא לקרב הגדול: להפוך את החרדים לאזרחים אמיתיים, כאלה שמבינים מהי מדינה ומהי דמוקרטיה.", url: "calcalist-march-2026", tags: ["חברה חרדית","דת ומדינה","פוליטיקה","חינוך"], image: "" },
   { year: 2026, date: "2026-01-07", title: "חַיֵּי אָדָם הוּא דְּזָל", excerpt: "ביטוי תלמודי על חיי אדם שזולים — מבט על גישת החברה החרדית לערך חיי אדם, משירות צבאי דרך מירון ועד קורונה.", url: "https://betochami.blogspot.com/2026/01/blog-post.html", tags: ["גיוס ושירות","חברה חרדית","אתיקה וחברה"], image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT5WLdfuzYqx8ZJi1umqeiFqxCfjuP7Id5GvHKoaxY2T19a4lhtCMPk1cGiEaKbz7Syj7xDzXToSMbjGbexud5IFqAyX_opA-5AdWbNs3zI4bslFNgRG9NLOJCJJYrn_wRNmKZBAQFNyZzkiMIot-QnEib2gJK6pJumE1WRUGCT3Tc1T9mE22zDnaHmMk/s400/%D7%94%D7%A4%D7%92%D7%A0%D7%94%20%D7%A9%D7%9C%20%D7%A7%D7%A0%D7%90%D7%99%D7%9D.jpg" },
 
   // ===== 2025 =====
