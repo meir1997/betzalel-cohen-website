@@ -6,6 +6,32 @@ let currentTag = 'all';
 let searchQuery = '';
 let filteredPosts = [];
 
+// Rebuild year + tag filter buttons — called initially and after blog-loader merges feed posts
+function rebuildFilters() {
+  if (typeof POSTS === 'undefined') return;
+  const allTags = {};
+  POSTS.forEach(p => {
+    if (p.tags) p.tags.forEach(t => { allTags[t] = (allTags[t] || 0) + 1; });
+  });
+  const sortedTags = Object.entries(allTags).sort((a, b) => b[1] - a[1]);
+
+  const tagFiltersEl = document.getElementById('tagFilters');
+  if (tagFiltersEl) {
+    tagFiltersEl.innerHTML =
+      '<button class="year-btn ' + (currentTag === 'all' ? 'active' : '') + '" data-tag="all" style="' + (currentTag === 'all' ? 'border-color:var(--navy);background:var(--navy);color:white;' : 'border-color:var(--gold);') + '">הכל</button>' +
+      sortedTags.map(([tag, count]) =>
+        '<button class="year-btn ' + (currentTag === tag ? 'active' : '') + '" data-tag="' + tag + '" style="' + (currentTag === tag ? 'border-color:var(--navy);background:var(--navy);color:white;' : 'border-color:var(--gold);') + '">' + tag + ' <span style="font-size:0.75rem;color:var(--gray-400);">(' + count + ')</span></button>'
+      ).join('');
+  }
+
+  const yearsSet = [...new Set(POSTS.map(p => p.year))].sort((a, b) => b - a);
+  const filtersEl = document.getElementById('yearFilters');
+  if (filtersEl) {
+    filtersEl.innerHTML = '<button class="year-btn ' + (currentYear === 'all' ? 'active' : '') + '" data-year="all">כל השנים</button>' +
+      yearsSet.map(y => '<button class="year-btn ' + (String(currentYear) === String(y) ? 'active' : '') + '" data-year="' + y + '">' + y + '</button>').join('');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof POSTS === 'undefined') return;
 

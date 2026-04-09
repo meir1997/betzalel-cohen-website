@@ -184,6 +184,7 @@
 
   <script src="js/posts-data.js"></script>
   <script src="js/posts-content.js"></script>
+  <script src="js/blog-loader.js"></script>
   <script>
     // Mobile nav
     document.getElementById('navToggle').addEventListener('click', () => {
@@ -203,6 +204,8 @@
 
     if (!isNaN(postId) && POSTS[postId]) {
       const post = POSTS[postId];
+      // Expose current post for the blog-loader so it can reload content after feed fetch
+      window.__currentPost = post;
 
       // Update page
       document.title = post.title + ' — בצלאל כהן';
