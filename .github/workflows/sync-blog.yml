@@ -1,14 +1,9 @@
 name: Sync Blog Posts from Blogspot
 
+# Runs only when triggered manually from the Actions tab.
+# (No schedule — the user updates the site directly for new posts.)
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'scripts/fetch_blog.py'
-      - '.github/workflows/sync-blog.yml'
-  schedule:
-    # Every 6 hours
-    - cron: '0 */6 * * *'
 
 permissions:
   contents: write
