@@ -118,6 +118,7 @@ async function updateEpisodes() {
       const pubDate = item.pubDate?.[0] || '';
       const duration = formatDuration(item['itunes:duration']?.[0] || '');
       const episodeNum = total - index;
+      const audioUrl = item.enclosure?.[0]?.$?.url || '';
 
       const cleaned = applyTitleOverride(cleanTitle(rawTitle));
       const guest = extractGuest(rawTitle, cleaned);
@@ -127,6 +128,7 @@ async function updateEpisodes() {
         title: cleaned,
         guest: guest,
         duration: duration,
+        audioUrl: audioUrl,
         url: 'https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY',
         publishedAt: new Date(pubDate).toISOString().split('T')[0]
       });

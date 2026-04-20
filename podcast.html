@@ -120,10 +120,56 @@
       justify-content: center;
       flex-shrink: 0;
       transition: all var(--transition);
+      cursor: pointer;
+      border: none;
     }
     .episode-card:hover .episode-play {
       background: #c53030;
       transform: scale(1.08);
+    }
+    .episode-card.playing .episode-play {
+      background: #1a1a2e;
+    }
+    .episode-audio {
+      grid-column: 1 / -1;
+      width: 100%;
+      margin-top: 16px;
+      display: none;
+      background: #f7f7f5;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+    .episode-card.playing .episode-audio {
+      display: block;
+    }
+    .episode-audio audio {
+      width: 100%;
+      height: 40px;
+    }
+    .episode-card {
+      cursor: pointer;
+    }
+    .episode-card.playing {
+      grid-template-rows: auto auto;
+    }
+    .episode-youtube-link {
+      grid-column: 1 / -1;
+      display: none;
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: var(--gray-400);
+      text-align: center;
+    }
+    .episode-card.playing .episode-youtube-link {
+      display: block;
+    }
+    .episode-youtube-link a {
+      color: #e53e3e;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .episode-youtube-link a:hover {
+      text-decoration: underline;
     }
 
     .hosts-grid {
@@ -425,6 +471,41 @@
 
   <script src="js/main.js"></script>
   <script>
+    const playIconSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>';
+    const pauseIconSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+    let currentAudio = null;
+    let currentCard = null;
+
+    function togglePlay(card, audioUrl, youtubeUrl) {
+      const audio = card.querySelector('audio');
+      const playBtn = card.querySelector('.episode-play');
+
+      // If clicking a different card, stop the previous one
+      if (currentAudio && currentAudio !== audio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        if (currentCard) {
+          currentCard.classList.remove('playing');
+          currentCard.querySelector('.episode-play').innerHTML = playIconSvg;
+        }
+      }
+
+      if (audio.paused) {
+        if (!audioUrl) {
+          window.open(youtubeUrl, '_blank');
+          return;
+        }
+        audio.play();
+        card.classList.add('playing');
+        playBtn.innerHTML = pauseIconSvg;
+        currentAudio = audio;
+        currentCard = card;
+      } else {
+        audio.pause();
+        playBtn.innerHTML = playIconSvg;
+      }
+    }
+
     async function loadEpisodes() {
       try {
         const response = await fetch('episodes.json?v=' + Date.now());
@@ -434,9 +515,7 @@
         episodesList.innerHTML = '';
 
         data.episodes.forEach(episode => {
-          const card = document.createElement('a');
-          card.href = episode.url;
-          card.target = '_blank';
+          const card = document.createElement('div');
           card.className = 'episode-card';
           card.innerHTML = `
             <div class="episode-num">
@@ -447,10 +526,33 @@
               <div class="episode-title">${episode.title}</div>
               <div class="episode-guest">${episode.guest}</div>
             </div>
-            <div class="episode-play">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+            <button class="episode-play" aria-label="נגן פרק">
+              ${playIconSvg}
+            </button>
+            <div class="episode-audio">
+              <audio preload="metadata" controls>
+                <source src="${episode.audioUrl || ''}" type="audio/mpeg">
+                הדפדפן שלך לא תומך בנגן אודיו.
+              </audio>
+            </div>
+            <div class="episode-youtube-link">
+              מעדיפים לצפות? <a href="${episode.url}" target="_blank">פתחו ביוטיוב</a>
             </div>
           `;
+
+          card.addEventListener('click', (e) => {
+            // Don't toggle if clicking inside audio controls or the youtube link
+            if (e.target.closest('audio') || e.target.closest('.episode-youtube-link')) return;
+            togglePlay(card, episode.audioUrl, episode.url);
+          });
+
+          const audio = card.querySelector('audio');
+          audio.addEventListener('ended', () => {
+            card.classList.remove('playing');
+            card.querySelector('.episode-play').innerHTML = playIconSvg;
+          });
+          audio.addEventListener('click', (e) => e.stopPropagation());
+
           episodesList.appendChild(card);
         });
 
