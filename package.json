@@ -1,0 +1,12 @@
+{
+  "name": "betzalel-cohen-site",
+  "version": "1.0.0",
+  "description": "בצלאל כהן website with podcast automation",
+  "main": "index.html",
+  "scripts": {
+    "update-episodes": "node scripts/update-episodes.js"
+  },
+  "dependencies": {
+    "xml2js": "^0.6.2"
+  }
+}
