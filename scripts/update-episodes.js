@@ -118,7 +118,18 @@ async function updateEpisodes() {
       const pubDate = item.pubDate?.[0] || '';
       const duration = formatDuration(item['itunes:duration']?.[0] || '');
       const episodeNum = total - index;
-      const audioUrl = item.enclosure?.[0]?.$?.url || '';
+      let audioUrl = item.enclosure?.[0]?.$?.url || '';
+
+      // anchor.fm wraps the real MP3 URL after /play/{id}/ (URL-encoded).
+      // Extract the direct CDN URL to avoid redirect issues in browsers.
+      const directMatch = audioUrl.match(/\/play\/\d+\/(https?.+)$/);
+      if (directMatch) {
+        try {
+          audioUrl = decodeURIComponent(directMatch[1]);
+        } catch (e) {
+          // Keep wrapped URL if decoding fails
+        }
+      }
 
       const cleaned = applyTitleOverride(cleanTitle(rawTitle));
       const guest = extractGuest(rawTitle, cleaned);
