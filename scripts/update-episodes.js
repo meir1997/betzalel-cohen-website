@@ -6,15 +6,30 @@ const xml2js = require('xml2js');
 const PODCAST_ID = '1874924988';
 const EPISODES_FILE = path.join(__dirname, '../episodes.json');
 
+// Manual guest overrides by exact episode title match (case insensitive, partial)
+// When the RSS title doesn't follow the "עם X" pattern, add an override here.
+const GUEST_OVERRIDES = [
+  { titleIncludes: 'מחומה לקריסה', guest: 'עם שלמה טייטלבאום' },
+  { titleIncludes: 'איך נחיה פה יחד', guest: 'עם נורית קנטי' }
+];
+
+// Manual title fixes for known encoding issues
+const TITLE_OVERRIDES = [
+  { titleIncludes: 'נורית קנטי מראיינת', fixed: 'איך נחיה פה יחד? נורית קנטי מראיינת את מיכל ובצלאל' }
+];
+
 function fetch(url) {
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         return fetch(res.headers.location).then(resolve).catch(reject);
       }
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => resolve(data));
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
+      res.on('end', () => {
+        const buffer = Buffer.concat(chunks);
+        resolve(buffer.toString('utf8'));
+      });
     }).on('error', reject);
   });
 }
@@ -54,9 +69,31 @@ function cleanTitle(title) {
   return t.trim();
 }
 
-function extractGuest(title) {
-  const match = title.match(/עם ([^|,]+?)\s*$/);
-  if (match) return `עם ${match[1].trim()}`;
+function applyTitleOverride(title) {
+  for (const override of TITLE_OVERRIDES) {
+    if (title.includes(override.titleIncludes)) {
+      return override.fixed;
+    }
+  }
+  return title;
+}
+
+function extractGuest(rawTitle, cleanedTitle) {
+  // Check manual overrides first
+  for (const override of GUEST_OVERRIDES) {
+    if (rawTitle.includes(override.titleIncludes) || cleanedTitle.includes(override.titleIncludes)) {
+      return override.guest;
+    }
+  }
+
+  // Pattern: "עם X" at end
+  const withMatch = rawTitle.match(/עם ([^|,]+?)\s*$/);
+  if (withMatch) return `עם ${withMatch[1].trim()}`;
+
+  // Pattern: "X מראיינת/מראיין"
+  const interviewerMatch = rawTitle.match(/([^|,?]+?)\s+מראיינ[הת]?/);
+  if (interviewerMatch) return `עם ${interviewerMatch[1].trim()}`;
+
   return '';
 }
 
@@ -82,12 +119,14 @@ async function updateEpisodes() {
       const duration = formatDuration(item['itunes:duration']?.[0] || '');
       const episodeNum = total - index;
 
+      const cleaned = applyTitleOverride(cleanTitle(rawTitle));
+      const guest = extractGuest(rawTitle, cleaned);
+
       episodes.push({
         id: episodeNum,
-        title: cleanTitle(rawTitle),
-        guest: extractGuest(rawTitle),
+        title: cleaned,
+        guest: guest,
         duration: duration,
-        views: 0,
         url: 'https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY',
         publishedAt: new Date(pubDate).toISOString().split('T')[0]
       });
