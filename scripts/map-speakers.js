@@ -43,11 +43,13 @@ function identifySpeakers(utterances, guestName) {
   const unmapped = allSpeakers.filter(s => !speakerMap[s]);
   const sortedUnmapped = unmapped.sort((a, b) => counts[b] - counts[a]);
 
+  // Priority order: Michal (host) > Guest (talks a lot, main interview subject) > Betzalel (co-host)
+  // This matches podcast structure where the guest speaks the most after the primary host
   for (const s of sortedUnmapped) {
     const assigned = new Set(Object.values(speakerMap));
     if (!assigned.has('מיכל גלבוע אטר')) { speakerMap[s] = 'מיכל גלבוע אטר'; continue; }
-    if (!assigned.has('הרב בצלאל כהן')) { speakerMap[s] = 'הרב בצלאל כהן'; continue; }
     if (guestName && !assigned.has(guestName)) { speakerMap[s] = guestName; continue; }
+    if (!assigned.has('הרב בצלאל כהן')) { speakerMap[s] = 'הרב בצלאל כהן'; continue; }
     speakerMap[s] = `דובר ${s}`;
   }
 
