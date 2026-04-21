@@ -1,0 +1,6 @@
+{
+  "_comment": "Manual speaker overrides by episode ID. Keys are AssemblyAI speaker labels (A/B/C), values are display names. Takes precedence over automatic detection.",
+  "_example": {
+    "9": { "A": "מיכל גלבוע אטר", "B": "דידי שור", "C": "הרב בצלאל כהן" }
+  }
+}
