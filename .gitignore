@@ -2,3 +2,4 @@
 .netlify
 .claude/
 node_modules/
+.env

@@ -172,6 +172,97 @@
       text-decoration: underline;
     }
 
+    /* Transcript panel */
+    .episode-transcript {
+      grid-column: 1 / -1;
+      display: none;
+      margin-top: 12px;
+      max-height: 400px;
+      overflow-y: auto;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    .episode-card.playing .episode-transcript {
+      display: block;
+    }
+    .transcript-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--gray-400);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .transcript-speakers {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .speaker-legend {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.75rem;
+    }
+    .speaker-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .transcript-utterance {
+      display: flex;
+      gap: 10px;
+      padding: 7px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 3px;
+      transition: background 0.15s;
+      border-right: 3px solid transparent;
+    }
+    .transcript-utterance:hover {
+      background: rgba(212,175,55,0.05);
+    }
+    .transcript-utterance.active {
+      background: rgba(212,175,55,0.12);
+      border-right-color: var(--gold);
+    }
+    .utterance-speaker {
+      flex-shrink: 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      min-width: 95px;
+      padding-top: 2px;
+    }
+    .utterance-text {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--text);
+    }
+    .utterance-time {
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      color: var(--gray-400);
+      font-variant-numeric: tabular-nums;
+      padding-top: 3px;
+    }
+    .transcript-loading, .transcript-empty {
+      text-align: center;
+      padding: 24px;
+      color: var(--gray-400);
+      font-size: 0.88rem;
+    }
+    @media (max-width: 700px) {
+      .utterance-speaker { min-width: 70px; font-size: 0.72rem; }
+      .utterance-text { font-size: 0.86rem; }
+      .utterance-time { display: none; }
+      .transcript-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+    }
+
     .hosts-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -476,11 +567,10 @@
     let currentAudio = null;
     let currentCard = null;
 
-    function togglePlay(card, audioUrl, youtubeUrl) {
+    function togglePlay(card, audioUrl, youtubeUrl, episodeId) {
       const audio = card.querySelector('audio');
       const playBtn = card.querySelector('.episode-play');
 
-      // If clicking a different card, stop the previous one
       if (currentAudio && currentAudio !== audio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
@@ -500,9 +590,109 @@
         playBtn.innerHTML = pauseIconSvg;
         currentAudio = audio;
         currentCard = card;
+        loadTranscript(card, episodeId);
       } else {
         audio.pause();
         playBtn.innerHTML = playIconSvg;
+      }
+    }
+
+    const SPEAKER_COLORS = ['#1a1a2e', '#d4af37', '#e53e3e', '#4a5568', '#805ad5'];
+    const speakerColorMap = {};
+
+    function getSpeakerColor(name) {
+      if (!speakerColorMap[name]) {
+        speakerColorMap[name] = SPEAKER_COLORS[Object.keys(speakerColorMap).length % SPEAKER_COLORS.length];
+      }
+      return speakerColorMap[name];
+    }
+
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${m}:${String(s).padStart(2, '0')}`;
+    }
+
+    async function loadTranscript(card, episodeId) {
+      const panel = card.querySelector('.episode-transcript');
+      if (panel.dataset.loaded === 'true') return;
+
+      try {
+        const res = await fetch(`transcripts/episode-${episodeId}.json?v=${Date.now()}`);
+        if (!res.ok) {
+          panel.innerHTML = '<div class="transcript-empty">תמלול לא זמין לפרק זה עדיין.</div>';
+          panel.dataset.loaded = 'true';
+          return;
+        }
+        const transcript = await res.json();
+        renderTranscript(panel, transcript);
+        panel.dataset.loaded = 'true';
+      } catch (err) {
+        panel.innerHTML = '<div class="transcript-empty">שגיאה בטעינת התמלול.</div>';
+        panel.dataset.loaded = 'true';
+      }
+    }
+
+    function renderTranscript(panel, transcript) {
+      const speakers = [...new Set(transcript.utterances.map(u => u.speakerName))];
+      const legendHtml = speakers.map(s => `
+        <span class="speaker-legend">
+          <span class="speaker-dot" style="background:${getSpeakerColor(s)}"></span>
+          ${s}
+        </span>
+      `).join('');
+
+      const utterancesHtml = transcript.utterances.map((u, idx) => `
+        <div class="transcript-utterance" data-start="${u.start}" data-end="${u.end}" data-idx="${idx}">
+          <span class="utterance-time">${formatTime(u.start)}</span>
+          <span class="utterance-speaker" style="color:${getSpeakerColor(u.speakerName)}">${u.speakerName}</span>
+          <span class="utterance-text">${u.text}</span>
+        </div>
+      `).join('');
+
+      panel.innerHTML = `
+        <div class="transcript-header">
+          <div>תמלול אוטומטי (AssemblyAI)</div>
+          <div class="transcript-speakers">${legendHtml}</div>
+        </div>
+        <div class="transcript-body">${utterancesHtml}</div>
+      `;
+
+      // Click to seek
+      panel.querySelectorAll('.transcript-utterance').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = el.closest('.episode-card');
+          const audio = card.querySelector('audio');
+          audio.currentTime = parseFloat(el.dataset.start);
+          if (audio.paused) audio.play();
+        });
+      });
+    }
+
+    function syncTranscript(card, currentTime) {
+      const panel = card.querySelector('.episode-transcript');
+      if (panel.dataset.loaded !== 'true') return;
+      const utterances = panel.querySelectorAll('.transcript-utterance');
+      let activeEl = null;
+      utterances.forEach(el => {
+        const start = parseFloat(el.dataset.start);
+        const end = parseFloat(el.dataset.end);
+        if (currentTime >= start && currentTime < end) {
+          if (!el.classList.contains('active')) {
+            el.classList.add('active');
+            activeEl = el;
+          }
+        } else {
+          el.classList.remove('active');
+        }
+      });
+      if (activeEl) {
+        const panelRect = panel.getBoundingClientRect();
+        const elRect = activeEl.getBoundingClientRect();
+        if (elRect.top < panelRect.top || elRect.bottom > panelRect.bottom) {
+          activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       }
     }
 
@@ -517,6 +707,7 @@
         data.episodes.forEach(episode => {
           const card = document.createElement('div');
           card.className = 'episode-card';
+          card.dataset.episodeId = episode.id;
           card.innerHTML = `
             <div class="episode-num">
               <span class="ep-number">${episode.id}</span>
@@ -535,15 +726,17 @@
                 הדפדפן שלך לא תומך בנגן אודיו.
               </audio>
             </div>
+            <div class="episode-transcript" data-loaded="false">
+              <div class="transcript-loading">טוען תמלול...</div>
+            </div>
             <div class="episode-youtube-link">
               מעדיפים לצפות? <a href="${episode.url}" target="_blank">פתחו ביוטיוב</a>
             </div>
           `;
 
           card.addEventListener('click', (e) => {
-            // Don't toggle if clicking inside audio controls or the youtube link
-            if (e.target.closest('audio') || e.target.closest('.episode-youtube-link')) return;
-            togglePlay(card, episode.audioUrl, episode.url);
+            if (e.target.closest('audio') || e.target.closest('.episode-youtube-link') || e.target.closest('.transcript-utterance')) return;
+            togglePlay(card, episode.audioUrl, episode.url, episode.id);
           });
 
           const audio = card.querySelector('audio');
@@ -552,6 +745,7 @@
             card.querySelector('.episode-play').innerHTML = playIconSvg;
           });
           audio.addEventListener('click', (e) => e.stopPropagation());
+          audio.addEventListener('timeupdate', () => syncTranscript(card, audio.currentTime));
 
           episodesList.appendChild(card);
         });

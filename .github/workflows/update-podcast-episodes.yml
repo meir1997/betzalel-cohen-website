@@ -25,14 +25,23 @@ jobs:
       - name: Fetch latest episodes from Apple Podcasts
         run: node scripts/update-episodes.js
 
+      - name: Transcribe new episodes
+        if: ${{ env.ASSEMBLYAI_API_KEY != '' }}
+        env:
+          ASSEMBLYAI_API_KEY: ${{ secrets.ASSEMBLYAI_API_KEY }}
+        run: node scripts/transcribe-episodes.js
+
+      - name: Map speaker names
+        run: node scripts/map-speakers.js
+
       - name: Commit and push if changed
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add episodes.json
+          git add episodes.json transcripts/
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "עדכון אוטומטי: פרקי פודקאסט חדשים"
+            git commit -m "עדכון אוטומטי: פרקים חדשים + תמלול"
             git push
           fi

@@ -7,6 +7,7 @@
     "update-episodes": "node scripts/update-episodes.js"
   },
   "dependencies": {
+    "dotenv": "^17.4.2",
     "xml2js": "^0.6.2"
   }
 }
