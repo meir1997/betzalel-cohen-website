@@ -182,8 +182,8 @@
     </div>
   </footer>
 
-  <script src="js/posts-data.js?v=335"></script>
-  <script src="js/posts-content.js?v=335"></script>
+  <script src="js/posts-data.js?v=336"></script>
+  <script src="js/posts-content.js?v=336"></script>
   <script>
     // Mobile nav
     document.getElementById('navToggle').addEventListener('click', () => {
@@ -283,7 +283,14 @@
           sourceLink.href = post.sourceUrl;
           sourceLink.target = '_blank';
           sourceLink.className = 'source-link';
-          sourceLink.textContent = 'קראו את הכתבה באתר כלכליסט \u2190';
+          var sourceName = 'המקור';
+          if (post.sourceUrl.indexOf('calcalist') !== -1) sourceName = 'כלכליסט';
+          else if (post.sourceUrl.indexOf('makorrishon') !== -1) sourceName = 'מקור ראשון';
+          else if (post.sourceUrl.indexOf('maariv') !== -1) sourceName = 'מעריב';
+          else if (post.sourceUrl.indexOf('ynet') !== -1) sourceName = 'ynet';
+          else if (post.sourceUrl.indexOf('haaretz') !== -1) sourceName = 'הארץ';
+          sourceLink.rel = 'noopener';
+          sourceLink.textContent = 'קראו את הכתבה באתר ' + sourceName + ' \u2190';
           contentEl.appendChild(sourceLink);
         }
       } else {
