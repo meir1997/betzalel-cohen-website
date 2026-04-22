@@ -13,6 +13,7 @@
   const BRANCH = 'main';
   const POSTS_DATA_PATH = 'js/posts-data.js';
   const POSTS_CONTENT_PATH = 'js/posts-content.js';
+  // Token is stored in localStorage after first entry (one-time setup)
 
   // All known tags (extracted from existing posts)
   const KNOWN_TAGS = [
@@ -242,8 +243,11 @@
     const saved = localStorage.getItem('gh_token');
     if (saved) {
       ghTokenInput.value = saved;
-      tokenStatus.textContent = 'Token שמור';
+      tokenStatus.textContent = '✅ מחובר';
       tokenStatus.className = 'token-status connected';
+      // Hide token bar after saved
+      const bar = document.getElementById('tokenBar');
+      if (bar) bar.style.display = 'none';
     }
   }
 
@@ -251,8 +255,10 @@
     const val = ghTokenInput.value.trim();
     if (val) {
       localStorage.setItem('gh_token', val);
-      tokenStatus.textContent = 'Token נשמר בהצלחה';
+      tokenStatus.textContent = '✅ מחובר';
       tokenStatus.className = 'token-status connected';
+      const bar = document.getElementById('tokenBar');
+      if (bar) setTimeout(() => bar.style.display = 'none', 1500);
     } else {
       localStorage.removeItem('gh_token');
       tokenStatus.textContent = 'Token הוסר';
@@ -261,7 +267,7 @@
   });
 
   function getToken() {
-    return ghTokenInput.value.trim() || localStorage.getItem('gh_token') || '';
+    return localStorage.getItem('gh_token') || '';
   }
 
   // =============================================
