@@ -441,8 +441,67 @@
     </div>
   </div>
 
-  <script src="js/posts-data.js"></script>
-  <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
-  <script src="js/admin.js"></script>
+  <script>
+    // Inline login handler - doesn't depend on any external scripts
+    document.addEventListener('DOMContentLoaded', function() {
+      var pwd = document.getElementById('passwordInput');
+      var btn = document.getElementById('loginBtn');
+      var err = document.getElementById('loginError');
+      var toggle = document.getElementById('togglePassword');
+
+      if (toggle) {
+        toggle.addEventListener('click', function() {
+          var show = pwd.type === 'password';
+          pwd.type = show ? 'text' : 'password';
+          toggle.textContent = show ? '🙈' : '👁';
+        });
+      }
+
+      function tryLogin() {
+        if (pwd.value.trim() === '1234') {
+          sessionStorage.setItem('admin_auth', 'true');
+          err.style.display = 'none';
+          document.getElementById('loginScreen').style.display = 'none';
+          document.getElementById('adminPanel').style.display = 'block';
+          // Load heavy scripts only after login
+          var s1 = document.createElement('script');
+          s1.src = 'js/posts-data.js';
+          document.body.appendChild(s1);
+          var s2 = document.createElement('script');
+          s2.src = 'https://cdn.quilljs.com/1.3.7/quill.min.js';
+          s2.onload = function() {
+            var s3 = document.createElement('script');
+            s3.src = 'js/admin.js';
+            document.body.appendChild(s3);
+          };
+          document.body.appendChild(s2);
+        } else {
+          err.style.display = 'block';
+          pwd.value = '';
+          pwd.focus();
+        }
+      }
+
+      btn.addEventListener('click', tryLogin);
+      pwd.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryLogin(); });
+
+      // Auto-login if session exists
+      if (sessionStorage.getItem('admin_auth') === 'true') {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminPanel').style.display = 'block';
+        var s1 = document.createElement('script');
+        s1.src = 'js/posts-data.js';
+        document.body.appendChild(s1);
+        var s2 = document.createElement('script');
+        s2.src = 'https://cdn.quilljs.com/1.3.7/quill.min.js';
+        s2.onload = function() {
+          var s3 = document.createElement('script');
+          s3.src = 'js/admin.js';
+          document.body.appendChild(s3);
+        };
+        document.body.appendChild(s2);
+      }
+    });
+  </script>
 </body>
 </html>
