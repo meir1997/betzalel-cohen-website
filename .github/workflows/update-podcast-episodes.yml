@@ -31,7 +31,14 @@ jobs:
           ASSEMBLYAI_API_KEY: ${{ secrets.ASSEMBLYAI_API_KEY }}
         run: node scripts/transcribe-episodes.js
 
-      - name: Map speaker names
+      - name: Map speaker names via Claude
+        if: ${{ env.ANTHROPIC_API_KEY != '' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/map-speakers-llm.js
+
+      - name: Fallback speaker mapping (no LLM)
+        if: ${{ env.ANTHROPIC_API_KEY == '' }}
         run: node scripts/map-speakers.js
 
       - name: Commit and push if changed
