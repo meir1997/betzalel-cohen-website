@@ -253,20 +253,14 @@
     }
   }
 
-  saveTokenBtn.addEventListener('click', () => {
-    const val = ghTokenInput.value.trim();
-    if (val) {
-      localStorage.setItem('gh_token', val);
-      tokenStatus.textContent = '✅ מחובר';
-      tokenStatus.className = 'token-status connected';
-      const bar = document.getElementById('tokenBar');
-      if (bar) setTimeout(() => bar.style.display = 'none', 1500);
-    } else {
-      localStorage.removeItem('gh_token');
-      tokenStatus.textContent = 'Token הוסר';
-      tokenStatus.className = 'token-status';
-    }
-  });
+  if (saveTokenBtn) {
+    saveTokenBtn.addEventListener('click', () => {
+      const val = ghTokenInput.value.trim();
+      if (val) {
+        localStorage.setItem('gh_token', val);
+      }
+    });
+  }
 
   function getToken() {
     return GITHUB_TOKEN;
