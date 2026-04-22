@@ -197,9 +197,20 @@
       return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
     }
 
-    // Get post ID from URL
+    // Get post ID from URL - supports ?id=N (index), ?date=YYYY-MM-DD, or ?url=<blogger-url>
     const params = new URLSearchParams(window.location.search);
-    const postId = parseInt(params.get('id'));
+    let postId = parseInt(params.get('id'));
+    const dateParam = params.get('date');
+    const urlParam = params.get('url');
+
+    // Resolve by date or url if id is not provided/valid
+    if ((isNaN(postId) || !POSTS[postId]) && (dateParam || urlParam)) {
+      const foundIdx = POSTS.findIndex(p =>
+        (dateParam && p.date === dateParam) ||
+        (urlParam && p.url === urlParam)
+      );
+      if (foundIdx >= 0) postId = foundIdx;
+    }
 
     if (!isNaN(postId) && POSTS[postId]) {
       const post = POSTS[postId];
