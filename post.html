@@ -277,6 +277,15 @@
       if (html) {
         contentEl.innerHTML = html;
         cleanupContent(contentEl);
+        // Show source link if post has an original source URL
+        if (post.sourceUrl) {
+          var sourceLink = document.createElement('a');
+          sourceLink.href = post.sourceUrl;
+          sourceLink.target = '_blank';
+          sourceLink.className = 'source-link';
+          sourceLink.textContent = 'קראו את הכתבה באתר כלכליסט \u2190';
+          contentEl.appendChild(sourceLink);
+        }
       } else {
         // Final fallback: excerpt + link to original blog
         var fallbackHtml = '<p>' + post.excerpt + '</p>';
