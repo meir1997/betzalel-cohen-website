@@ -225,18 +225,20 @@
       // Load content from local data (instant)
       loadContent(post);
 
-      // Prev / Next navigation
+      // Prev / Next navigation (hide when coming from media section)
       const navEl = document.getElementById('postNav');
-      let html = '';
-      if (postId > 0) {
-        const prev = POSTS[postId - 1];
-        html += '<a href="post.html?id=' + (postId - 1) + '" class="post-nav-link prev"><span class="post-nav-label">→ המאמר הקודם</span><span class="post-nav-title">' + prev.title + '</span></a>';
+      if (params.get('source') !== 'media') {
+        let html = '';
+        if (postId > 0) {
+          const prev = POSTS[postId - 1];
+          html += '<a href="post.html?id=' + (postId - 1) + '" class="post-nav-link prev"><span class="post-nav-label">→ המאמר הקודם</span><span class="post-nav-title">' + prev.title + '</span></a>';
+        }
+        if (postId < POSTS.length - 1) {
+          const next = POSTS[postId + 1];
+          html += '<a href="post.html?id=' + (postId + 1) + '" class="post-nav-link next"><span class="post-nav-label">המאמר הבא ←</span><span class="post-nav-title">' + next.title + '</span></a>';
+        }
+        navEl.innerHTML = html;
       }
-      if (postId < POSTS.length - 1) {
-        const next = POSTS[postId + 1];
-        html += '<a href="post.html?id=' + (postId + 1) + '" class="post-nav-link next"><span class="post-nav-label">המאמר הבא ←</span><span class="post-nav-title">' + next.title + '</span></a>';
-      }
-      navEl.innerHTML = html;
     } else {
       document.getElementById('postTitle').textContent = 'מאמר לא נמצא';
       document.getElementById('postContent').innerHTML = '<p>המאמר המבוקש לא נמצא. <a href="blog.html">חזרה לבלוג</a></p>';
