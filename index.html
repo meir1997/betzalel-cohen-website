@@ -229,16 +229,16 @@
           </div>
         </a>
 
-        <!-- Makor Rishon - Aguda Achat (ארכיון - לא זמין דיגיטלית) -->
-        <div style="background:white; border-radius:12px; padding:24px 28px; border:1px solid var(--border); color:inherit; display:flex; gap:18px; align-items:center; opacity:0.88;">
+        <!-- Makor Rishon - Aguda Achat -->
+        <a href="post.html?url=makor-rishon-2013-03-11&source=media" style="background:white; border-radius:12px; padding:24px 28px; border:1px solid var(--border); text-decoration:none; color:inherit; display:flex; gap:18px; align-items:center; transition: all 0.2s ease;">
           <div style="width:48px;height:48px;border-radius:10px;background:rgba(26,53,87,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a3557" stroke-width="1.8"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>
           </div>
           <div>
-            <div style="font-family:'Frank Ruhl Libre',serif; font-weight:700; font-size:1rem; color:var(--navy-dark); line-height:1.4; margin-bottom:4px;">איך גורמים לפיצוץ להיות מבוקר? בצלאל כהן פורס את משנתו</div>
-            <div style="font-size:0.82rem; color:var(--gray-400);">יאיר שלג // מקור ראשון · מרץ 2013 · <span style="color:var(--gray-400); font-weight:500; font-style:italic;">ארכיון</span></div>
+            <div style="font-family:'Frank Ruhl Libre',serif; font-weight:700; font-size:1rem; color:var(--navy-dark); line-height:1.4; margin-bottom:4px;">איך גורמים לפיצוץ להיות מבוקר?</div>
+            <div style="font-size:0.82rem; color:var(--gray-400);">יאיר שלג // מקור ראשון · <span style="color:var(--gold); font-weight:600;">קראו באתר</span></div>
           </div>
-        </div>
+        </a>
 
         <!-- NYT -->
         <a href="https://www.nytimes.com/2025/10/18/magazine/israel-haredi-draft-netanyahu-war.html" target="_blank" style="background:white; border-radius:12px; padding:24px 28px; border:1px solid var(--border); text-decoration:none; color:inherit; display:flex; gap:18px; align-items:center; transition: all 0.2s ease;">
@@ -282,34 +282,8 @@
             <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank" class="btn btn-outline">צפו ביוטיוב</a>
           </div>
         </div>
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <a href="podcast.html" style="background:rgba(255,255,255,0.08); border-radius:12px; padding:16px 20px; display:flex; align-items:center; gap:14px; text-decoration:none; color:white; transition: background 0.2s;">
-            <div style="width:40px;height:40px;border-radius:50%;background:#e53e3e;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-            </div>
-            <div>
-              <div style="font-weight:700; font-size:0.92rem;">פרק 8 — "לא יצאתי בשאלה, יצאתי עם תשובה"</div>
-              <div style="font-size:0.78rem; color:rgba(255,255,255,0.5);">עם איילת קרויזר · 52:10</div>
-            </div>
-          </a>
-          <a href="podcast.html" style="background:rgba(255,255,255,0.08); border-radius:12px; padding:16px 20px; display:flex; align-items:center; gap:14px; text-decoration:none; color:white; transition: background 0.2s;">
-            <div style="width:40px;height:40px;border-radius:50%;background:#e53e3e;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-            </div>
-            <div>
-              <div style="font-weight:700; font-size:0.92rem;">פרק 7 — אישה חרדית בלב המחנה הליברלי</div>
-              <div style="font-size:0.78rem; color:rgba(255,255,255,0.5);">עם ציפי לביא · 37:56</div>
-            </div>
-          </a>
-          <a href="podcast.html" style="background:rgba(255,255,255,0.08); border-radius:12px; padding:16px 20px; display:flex; align-items:center; gap:14px; text-decoration:none; color:white; transition: background 0.2s;">
-            <div style="width:40px;height:40px;border-radius:50%;background:#e53e3e;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-            </div>
-            <div>
-              <div style="font-weight:700; font-size:0.92rem;">פרק 6 — יהדות בכפיה עובדת?</div>
-              <div style="font-size:0.78rem; color:rgba(255,255,255,0.5);">עם ד"ר אוהד וייגלר · 35:11</div>
-            </div>
-          </a>
+        <div id="homeLatestEpisodes" style="display:flex; flex-direction:column; gap:12px;">
+          <!-- Populated by JS from episodes.json -->
         </div>
       </div>
     </div>
@@ -394,5 +368,35 @@
 
   <script src="js/posts-data.js?v=325"></script>
   <script src="js/main.js"></script>
+  <script>
+    (async function loadHomeLatestEpisodes() {
+      const container = document.getElementById('homeLatestEpisodes');
+      if (!container) return;
+      try {
+        const response = await fetch('episodes.json?v=' + Date.now());
+        if (!response.ok) throw new Error('Failed to load episodes');
+        const data = await response.json();
+        const latest = [...data.episodes]
+          .sort((a, b) => (b.id || 0) - (a.id || 0))
+          .slice(0, 3);
+        const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+        container.innerHTML = latest.map(ep => `
+          <a href="podcast.html" style="background:rgba(255,255,255,0.08); border-radius:12px; padding:16px 20px; display:flex; align-items:center; gap:14px; text-decoration:none; color:white; transition: background 0.2s;">
+            <div style="width:40px;height:40px;border-radius:50%;background:#e53e3e;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700; font-size:0.92rem;">פרק ${ep.id} — ${escapeHtml(ep.title)}</div>
+              <div style="font-size:0.78rem; color:rgba(255,255,255,0.5);">${escapeHtml(ep.guest)} · ${escapeHtml(ep.duration)}</div>
+            </div>
+          </a>
+        `).join('');
+      } catch (err) {
+        console.error('Error loading home episodes:', err);
+      }
+    })();
+  </script>
 </body>
 </html>
