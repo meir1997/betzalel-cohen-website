@@ -171,6 +171,17 @@
     .episode-youtube-link a:hover {
       text-decoration: underline;
     }
+    .episode-download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #e53e3e;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .episode-download-link:hover {
+      text-decoration: underline;
+    }
 
     /* Transcript panel */
     .episode-transcript {
@@ -730,12 +741,15 @@
               <div class="transcript-loading">טוען תמלול...</div>
             </div>
             <div class="episode-youtube-link">
-              מעדיפים לצפות? <a href="${episode.url}" target="_blank">פתחו ביוטיוב</a>
+              ${episode.audioUrl ? `<a href="${episode.audioUrl}" download="${episode.title.replace(/[^א-תa-zA-Z0-9 ]/g, '')}.mp3" class="episode-download-link" onclick="event.stopPropagation()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                הורד MP3
+              </a> · ` : ''}מעדיפים לצפות? <a href="${episode.url}" target="_blank">פתחו ביוטיוב</a>
             </div>
           `;
 
           card.addEventListener('click', (e) => {
-            if (e.target.closest('audio') || e.target.closest('.episode-youtube-link') || e.target.closest('.transcript-utterance')) return;
+            if (e.target.closest('audio') || e.target.closest('.episode-youtube-link') || e.target.closest('.episode-download-link') || e.target.closest('a[download]') || e.target.closest('.transcript-utterance')) return;
             togglePlay(card, episode.audioUrl, episode.url, episode.id);
           });
 
