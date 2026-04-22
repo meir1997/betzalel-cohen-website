@@ -145,12 +145,20 @@ ${samplesBlock}
 async function main() {
   const overrides = JSON.parse(fs.readFileSync(OVERRIDES_FILE, 'utf8'));
   const episodesData = JSON.parse(fs.readFileSync(EPISODES_FILE, 'utf8'));
+  const force = process.argv.includes('--force');
 
   for (const episode of episodesData.episodes) {
     const transcriptPath = path.join(TRANSCRIPTS_DIR, `episode-${episode.id}.json`);
     if (!fs.existsSync(transcriptPath)) continue;
 
     const transcript = JSON.parse(fs.readFileSync(transcriptPath, 'utf8'));
+
+    // Skip if already mapped (unless --force flag passed). Saves API costs on daily runs.
+    if (!force && transcript.speakerMap && transcript.utterances[0]?.speakerName) {
+      console.log(`⏭️  Episode ${episode.id}: already mapped, skipping`);
+      continue;
+    }
+
     const guestName = (episode.guest || '').replace(/^עם\s+/, '').trim();
 
     let speakerMap;
