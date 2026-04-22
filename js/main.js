@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // === Homepage: Featured Posts (latest 3) ===
   const featuredEl = document.getElementById('featuredPosts');
   if (featuredEl && typeof POSTS !== 'undefined') {
-    const latest = POSTS.slice(0, 3);
+    const blogPosts = POSTS.filter(p => !p.hideFromBlog);
+    const latest = blogPosts.slice(0, 3);
     featuredEl.innerHTML = latest.map((p, i) => {
       const idx = POSTS.indexOf(p);
       const imgHtml = p.image
@@ -36,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // === Homepage: Recent Posts List (next 6) ===
   const recentEl = document.getElementById('recentPostsList');
   if (recentEl && typeof POSTS !== 'undefined') {
-    const recent = POSTS.slice(3, 9);
+    const blogPosts = POSTS.filter(p => !p.hideFromBlog);
+    const recent = blogPosts.slice(3, 9);
     recentEl.innerHTML = recent.map((p, i) => {
       const idx = POSTS.indexOf(p);
       return `

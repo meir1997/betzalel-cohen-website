@@ -9,8 +9,9 @@ let filteredPosts = [];
 // Rebuild year + tag filter buttons — called initially and after blog-loader merges feed posts
 function rebuildFilters() {
   if (typeof POSTS === 'undefined') return;
+  const blogPosts = POSTS.filter(p => !p.hideFromBlog);
   const allTags = {};
-  POSTS.forEach(p => {
+  blogPosts.forEach(p => {
     if (p.tags) p.tags.forEach(t => { allTags[t] = (allTags[t] || 0) + 1; });
   });
   const sortedTags = Object.entries(allTags).sort((a, b) => b[1] - a[1]);
@@ -24,7 +25,7 @@ function rebuildFilters() {
       ).join('');
   }
 
-  const yearsSet = [...new Set(POSTS.map(p => p.year))].sort((a, b) => b - a);
+  const yearsSet = [...new Set(blogPosts.map(p => p.year))].sort((a, b) => b - a);
   const filtersEl = document.getElementById('yearFilters');
   if (filtersEl) {
     filtersEl.innerHTML = '<button class="year-btn ' + (currentYear === 'all' ? 'active' : '') + '" data-year="all">כל השנים</button>' +
@@ -43,8 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Build tag filter buttons
+  const blogPosts = POSTS.filter(p => !p.hideFromBlog);
   const allTags = {};
-  POSTS.forEach(p => {
+  blogPosts.forEach(p => {
     if (p.tags) p.tags.forEach(t => { allTags[t] = (allTags[t] || 0) + 1; });
   });
   const sortedTags = Object.entries(allTags).sort((a, b) => b[1] - a[1]);
@@ -73,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Build year filter buttons
-  const yearsSet = [...new Set(POSTS.map(p => p.year))].sort((a, b) => b - a);
+  const yearsSet = [...new Set(blogPosts.map(p => p.year))].sort((a, b) => b - a);
   const filtersEl = document.getElementById('yearFilters');
   if (filtersEl) {
     filtersEl.innerHTML = '<button class="year-btn active" data-year="all">כל השנים</button>' +
@@ -127,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getFiltered() {
-  let posts = POSTS;
+  let posts = POSTS.filter(p => !p.hideFromBlog);
   if (currentYear !== 'all') {
     posts = posts.filter(p => String(p.year) === String(currentYear));
   }
