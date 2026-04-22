@@ -367,13 +367,7 @@
       <h1 class="admin-title">פרסום פוסט חדש</h1>
       <p class="admin-subtitle">הפוסט יתפרסם ישירות באתר דרך GitHub</p>
 
-      <!-- GitHub Token - shown only if not yet saved -->
-      <div class="token-bar" id="tokenBar">
-        <label>GitHub Token (פעם אחת בלבד):</label>
-        <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" />
-        <button class="btn btn-sm btn-outline" id="saveTokenBtn">שמור</button>
-        <span class="token-status" id="tokenStatus"></span>
-      </div>
+      <input type="hidden" id="ghToken" /><span id="tokenStatus" style="display:none;"></span>
 
       <!-- Post Form -->
       <form id="postForm" autocomplete="off">
