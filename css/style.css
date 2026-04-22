@@ -185,12 +185,20 @@ p:last-child { margin-bottom: 0; }
 
 .hero-inner {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr;
   gap: 60px;
   align-items: center;
+  justify-items: center;
+  text-align: center;
   position: relative;
   z-index: 1;
 }
+.hero-content {
+  max-width: 780px;
+}
+.hero-badge { margin-inline: auto; }
+.hero-actions { justify-content: center; }
+.hero-stats { justify-content: center; }
 
 .hero-badge {
   display: inline-flex;
