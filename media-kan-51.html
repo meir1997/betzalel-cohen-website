@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>מדברים פתוח עם עמירם כהן — הרב בצלאל כהן | כאן 11</title>
+  <meta name="description" content="ריאיון של עמירם כהן עם הרב בצלאל כהן בפודקאסט 'מדברים פתוח' של כאן 11 — שילוב חרדים, חינוך, דמוקרטיה." />
+  <meta property="og:title" content="מדברים פתוח עם עמירם כהן — הרב בצלאל כהן" />
+  <meta property="og:description" content="ריאיון של עמירם כהן עם הרב בצלאל כהן בפודקאסט 'מדברים פתוח' של כאן 11" />
+  <meta property="og:image" content="images/betzalel-new.jpg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="he_IL" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
+  <style>
+    .interview-hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 72px 0 60px;
+      color: white;
+    }
+    .interview-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 16px;
+    }
+    .interview-meta span { display: inline-flex; align-items: center; gap: 5px; }
+    .player-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 28px;
+      margin-top: -40px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .player-card audio { width: 100%; height: 44px; }
+    .original-link {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      text-align: center;
+    }
+    .original-link a { color: #e53e3e; text-decoration: none; font-weight: 600; }
+    .original-link a:hover { text-decoration: underline; }
+
+    /* Transcript */
+    .transcript-wrap {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-top: 28px;
+    }
+    .transcript-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .transcript-speakers { display: flex; gap: 14px; flex-wrap: wrap; }
+    .speaker-legend { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; }
+    .speaker-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .transcript-body { max-height: 640px; overflow-y: auto; }
+    .transcript-utterance {
+      display: flex;
+      gap: 12px;
+      padding: 9px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 3px;
+      transition: background 0.15s;
+      border-right: 3px solid transparent;
+    }
+    .transcript-utterance:hover { background: rgba(212,175,55,0.06); }
+    .transcript-utterance.active {
+      background: rgba(212,175,55,0.14);
+      border-right-color: var(--gold);
+    }
+    .utterance-time {
+      flex-shrink: 0;
+      font-size: 0.72rem;
+      color: var(--gray-400);
+      font-variant-numeric: tabular-nums;
+      padding-top: 3px;
+      min-width: 42px;
+    }
+    .utterance-speaker {
+      flex-shrink: 0;
+      font-size: 0.8rem;
+      font-weight: 700;
+      min-width: 110px;
+      padding-top: 2px;
+    }
+    .utterance-text {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text);
+    }
+    .transcript-loading {
+      text-align: center;
+      padding: 28px;
+      color: var(--gray-400);
+      font-size: 0.9rem;
+    }
+    @media (max-width: 700px) {
+      .utterance-speaker { min-width: 80px; font-size: 0.74rem; }
+      .utterance-text { font-size: 0.88rem; }
+      .utterance-time { display: none; }
+      .transcript-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo">
+          <span class="logo-name">בצלאל כהן</span>
+          <span class="logo-sub">בתוך עמי</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html">דף הבית</a>
+          <a href="blog.html">בלוג</a>
+          <a href="about.html">אודות</a>
+          <a href="hdi.html">המכון החרדי לדמוקרטיה</a>
+          <a href="index.html#media" class="active">מהתקשורת</a>
+          <a href="podcast.html">פודקאסט</a>
+          <a href="contact.html" class="nav-cta">צור קשר</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="תפריט">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="interview-hero">
+    <div class="container" style="max-width:900px;">
+      <div class="interview-meta">
+        <span>כאן 11 · מדברים פתוח</span>
+        <span>·</span>
+        <span>26.3.2026</span>
+        <span>·</span>
+        <span>51:14</span>
+      </div>
+      <h1 style="font-family:'Frank Ruhl Libre',serif; font-size:clamp(1.8rem,4vw,2.6rem); color:white; line-height:1.25; margin-bottom:12px;">
+        מדברים פתוח עם עמירם כהן — הרב בצלאל כהן
+      </h1>
+      <p style="color:rgba(255,255,255,0.75); line-height:1.75; font-size:1.05rem; max-width:720px;">
+        עמירם כהן משוחח עם הרב בצלאל כהן על שילוב חרדים בחברה הישראלית, חינוך, דמוקרטיה ועתיד יהדות ישראל.
+      </p>
+    </div>
+  </section>
+
+  <!-- PLAYER -->
+  <section style="background:var(--gray-50); padding:0 0 40px;">
+    <div class="container" style="max-width:900px;">
+      <div class="player-card">
+        <audio id="audioPlayer" preload="metadata" controls>
+          <source src="audio/kan-medabrim-patuach-51.mp3" type="audio/mpeg">
+          הדפדפן שלך לא תומך בנגן אודיו.
+        </audio>
+        <div class="original-link">
+          <a href="https://www.kan.org.il/content/kan/podcasts/p-857058/1018590/" target="_blank" rel="noopener">האזינו באתר כאן 11 ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSCRIPT -->
+  <section style="padding:0 0 72px; background:var(--gray-50);">
+    <div class="container" style="max-width:900px;">
+      <div class="transcript-wrap">
+        <div class="transcript-header">
+          <div>תמלול אוטומטי (AssemblyAI) · לחיצה על שורה מקפיצה את הנגן לאותו רגע</div>
+          <div class="transcript-speakers" id="speakersLegend"></div>
+        </div>
+        <div class="transcript-body" id="transcriptBody">
+          <div class="transcript-loading">טוען תמלול...</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo-name" style="font-family:'Frank Ruhl Libre',serif; color:white; font-size:1.4rem;">בצלאל כהן</span>
+          <span class="logo-sub" style="color:var(--gold-light); font-size:0.75rem; letter-spacing:0.06em; display:block; margin-top:4px;">בתוך עמי</span>
+          <p>מחשבות על החברה החרדית, חינוך, מנהיגות ועתיד יהדות ישראל.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">ניווט</div>
+          <div class="footer-links">
+            <a href="index.html">דף הבית</a>
+            <a href="blog.html">בלוג</a>
+            <a href="about.html">אודות</a>
+            <a href="hdi.html">המכון החרדי לדמוקרטיה</a>
+            <a href="index.html#media">מהתקשורת</a>
+            <a href="podcast.html">פודקאסט</a>
+            <a href="contact.html">צור קשר</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">קישורים</div>
+          <div class="footer-links">
+            <a href="https://www.hdi.org.il/" target="_blank">אתר HDI</a>
+            <a href="https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY" target="_blank">פודקאסט ביוטיוב</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 בצלאל כהן. כל הזכויות שמורות.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const SPEAKER_COLORS = { 'עמירם כהן': '#1a1a2e', 'הרב בצלאל כהן': '#e53e3e' };
+    const FALLBACK_COLORS = ['#d4af37', '#4a5568', '#805ad5'];
+
+    function colorFor(name) {
+      if (SPEAKER_COLORS[name]) return SPEAKER_COLORS[name];
+      const idx = Math.abs([...name].reduce((a, c) => a + c.charCodeAt(0), 0)) % FALLBACK_COLORS.length;
+      return FALLBACK_COLORS[idx];
+    }
+
+    function fmtTime(s) {
+      const m = Math.floor(s / 60);
+      const r = Math.floor(s % 60);
+      return `${m}:${String(r).padStart(2, '0')}`;
+    }
+
+    async function init() {
+      const audio = document.getElementById('audioPlayer');
+      const body = document.getElementById('transcriptBody');
+      const legend = document.getElementById('speakersLegend');
+
+      let transcript;
+      try {
+        const res = await fetch('transcripts/kan-medabrim-patuach-51.json?v=' + Date.now());
+        if (!res.ok) throw new Error('failed');
+        transcript = await res.json();
+      } catch (e) {
+        body.innerHTML = '<div class="transcript-loading">שגיאה בטעינת התמלול.</div>';
+        return;
+      }
+
+      const speakers = [...new Set(transcript.utterances.map(u => u.speakerName))];
+      legend.innerHTML = speakers.map(s => `
+        <span class="speaker-legend">
+          <span class="speaker-dot" style="background:${colorFor(s)}"></span>
+          ${s}
+        </span>
+      `).join('');
+
+      body.innerHTML = transcript.utterances.map((u, idx) => `
+        <div class="transcript-utterance" data-start="${u.start}" data-end="${u.end}" data-idx="${idx}">
+          <span class="utterance-time">${fmtTime(u.start)}</span>
+          <span class="utterance-speaker" style="color:${colorFor(u.speakerName)}">${u.speakerName}</span>
+          <span class="utterance-text">${u.text}</span>
+        </div>
+      `).join('');
+
+      body.querySelectorAll('.transcript-utterance').forEach(el => {
+        el.addEventListener('click', () => {
+          audio.currentTime = parseFloat(el.dataset.start);
+          if (audio.paused) audio.play();
+        });
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        const t = audio.currentTime;
+        const all = body.querySelectorAll('.transcript-utterance');
+        let active = null;
+        all.forEach(el => {
+          const s = parseFloat(el.dataset.start);
+          const e = parseFloat(el.dataset.end);
+          if (t >= s && t < e) {
+            if (!el.classList.contains('active')) {
+              el.classList.add('active');
+              active = el;
+            }
+          } else {
+            el.classList.remove('active');
+          }
+        });
+        if (active) {
+          const bRect = body.getBoundingClientRect();
+          const aRect = active.getBoundingClientRect();
+          if (aRect.top < bRect.top || aRect.bottom > bRect.bottom) {
+            active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>
