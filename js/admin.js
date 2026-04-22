@@ -7,7 +7,7 @@
   'use strict';
 
   // ---- Config ----
-  const PASSWORD = 'Bezalel2026!';
+  const PASSWORD = '1234';
   const REPO_OWNER = 'meir1997';
   const REPO_NAME = 'betzalel-cohen-website';
   const BRANCH = 'main';
