@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 11,
+      "title": "״כאילו לא חרב העולם בחוץ״. אהרן מלאך",
+      "guest": "",
+      "duration": "27:40",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-3-28/423015812-44100-2-6e5ae9f82d9c6.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-04-28"
+    },
+    {
       "id": 10,
       "title": "תהום פעורה בינינו",
       "guest": "עם רפאל פורטל",
@@ -91,5 +100,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-04-28T05:34:29.346Z"
+  "lastUpdated": "2026-04-29T05:30:48.379Z"
 }
