@@ -16,7 +16,8 @@ const GUEST_OVERRIDES = [
 
 // Manual title fixes for known encoding issues
 const TITLE_OVERRIDES = [
-  { titleIncludes: 'נורית קנטי מראיינת', fixed: 'איך נחיה פה יחד? נורית קנטי מראיינת את מיכל ובצלאל' }
+  { titleIncludes: 'נורית קנטי מראיינת', fixed: 'איך נחיה פה יחד? נורית קנטי מראיינת את מיכל ובצלאל' },
+  { titleIncludes: 'כאילו לא חרב העולם', fixed: '״כאילו לא חרב העולם בחוץ״' }
 ];
 
 function fetch(url) {
