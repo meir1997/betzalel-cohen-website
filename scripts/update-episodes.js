@@ -10,7 +10,8 @@ const EPISODES_FILE = path.join(__dirname, '../episodes.json');
 // When the RSS title doesn't follow the "עם X" pattern, add an override here.
 const GUEST_OVERRIDES = [
   { titleIncludes: 'מחומה לקריסה', guest: 'עם שלמה טייטלבאום' },
-  { titleIncludes: 'איך נחיה פה יחד', guest: 'עם נורית קנטי' }
+  { titleIncludes: 'איך נחיה פה יחד', guest: 'עם נורית קנטי' },
+  { titleIncludes: 'כאילו לא חרב העולם', guest: 'עם אהרן מלאך' }
 ];
 
 // Manual title fixes for known encoding issues
