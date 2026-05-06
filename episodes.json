@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 12,
+      "title": "לפרוץ את שערי הרבנות",
+      "guest": "",
+      "duration": "36:16",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-4-4/423418002-44100-2-41cbb4f62b965.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-05-05"
+    },
+    {
       "id": 11,
       "title": "״כאילו לא חרב העולם בחוץ״",
       "guest": "עם אהרן מלאך",
@@ -100,5 +109,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-05-05T05:18:28.997Z"
+  "lastUpdated": "2026-05-06T05:33:13.636Z"
 }
