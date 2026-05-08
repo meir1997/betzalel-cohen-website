@@ -142,10 +142,46 @@ ${samplesBlock}
   return result;
 }
 
+async function inferGuestFromTranscript(transcript, episodeTitle) {
+  const intro = (transcript.fullText || '').substring(0, 2000);
+  if (!intro) return null;
+  const safeTitle = (episodeTitle || '').replace(/"/g, '').replace(/'/g, '');
+  const prompt = `זהו תחילת תמלול של פודקאסט "חרדים למדינה — סיפור משותף". המנחים הקבועים הם:
+- מיכל גלבוע אטר (מנחה ראשית, חילונית)
+- הרב בצלאל כהן (שותף-מנחה, חרדי)
+
+בכל פרק יש אורח אחד שאינו אחד מהמנחים.
+
+נושא הפרק: ${safeTitle}
+
+תחילת התמלול:
+${intro}
+
+זהה את שם האורח (השם המלא — שם פרטי + שם משפחה). החזר JSON תקין בלבד, ללא markdown:
+{"guest": "שם פרטי שם משפחה"}
+
+אם האורח לא הוצג בשם המלא בקטע הזה, החזר {"guest": null}.`;
+
+  const response = await callClaude(prompt);
+  let cleaned = response.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
+  const start = cleaned.indexOf('{');
+  const end = cleaned.lastIndexOf('}');
+  if (start === -1 || end === -1) return null;
+  const parsed = JSON.parse(cleaned.substring(start, end + 1));
+  return parsed.guest || null;
+}
+
+function isMappingComplete(speakerMap) {
+  if (!speakerMap) return false;
+  // Reject placeholders like "דובר A" that mean a speaker wasn't actually identified.
+  return Object.values(speakerMap).every(v => v && !/^דובר\s+[A-Z]$/.test(v));
+}
+
 async function main() {
   const overrides = JSON.parse(fs.readFileSync(OVERRIDES_FILE, 'utf8'));
   const episodesData = JSON.parse(fs.readFileSync(EPISODES_FILE, 'utf8'));
   const force = process.argv.includes('--force');
+  let episodesChanged = false;
 
   for (const episode of episodesData.episodes) {
     const transcriptPath = path.join(TRANSCRIPTS_DIR, `episode-${episode.id}.json`);
@@ -153,13 +189,34 @@ async function main() {
 
     const transcript = JSON.parse(fs.readFileSync(transcriptPath, 'utf8'));
 
-    // Skip if already mapped (unless --force flag passed). Saves API costs on daily runs.
-    if (!force && transcript.speakerMap && transcript.utterances[0]?.speakerName) {
+    // Skip only when the existing mapping is complete (no "דובר X" placeholders) and guest is filled.
+    // Stale-but-broken maps (e.g. guest was unknown when first mapped) get re-run automatically.
+    const mappingComplete = isMappingComplete(transcript.speakerMap) && transcript.utterances[0]?.speakerName;
+    const guestKnown = !!(episode.guest && episode.guest.trim());
+    if (!force && mappingComplete && guestKnown) {
       console.log(`⏭️  Episode ${episode.id}: already mapped, skipping`);
       continue;
     }
 
-    const guestName = (episode.guest || '').replace(/^עם\s+/, '').trim();
+    let guestName = (episode.guest || '').replace(/^עם\s+/, '').trim();
+
+    // If episodes.json lacks a guest (RSS title didn't match "עם X"), ask Claude to infer it
+    // from the transcript intro. Write back to episodes.json so the episode card shows it.
+    if (!guestName && !overrides[String(episode.id)]) {
+      try {
+        const inferred = await inferGuestFromTranscript(transcript, episode.title);
+        if (inferred) {
+          guestName = inferred;
+          episode.guest = `עם ${inferred}`;
+          episodesChanged = true;
+          console.log(`💡 Episode ${episode.id}: inferred guest "${inferred}"`);
+        } else {
+          console.log(`⚠️  Episode ${episode.id}: guest unknown — speaker mapping may be inaccurate`);
+        }
+      } catch (err) {
+        console.error(`  ⚠️  Guest inference failed: ${err.message}`);
+      }
+    }
 
     let speakerMap;
     if (overrides[String(episode.id)]) {
@@ -186,6 +243,11 @@ async function main() {
 
     fs.writeFileSync(transcriptPath, JSON.stringify(transcript, null, 2), 'utf8');
     console.log(`✅ Episode ${episode.id}: ${JSON.stringify(speakerMap)}`);
+  }
+
+  if (episodesChanged) {
+    fs.writeFileSync(EPISODES_FILE, JSON.stringify(episodesData, null, 2), 'utf8');
+    console.log(`📝 Updated episodes.json with inferred guest names`);
   }
 }
 

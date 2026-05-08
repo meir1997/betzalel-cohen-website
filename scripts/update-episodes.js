@@ -11,7 +11,8 @@ const EPISODES_FILE = path.join(__dirname, '../episodes.json');
 const GUEST_OVERRIDES = [
   { titleIncludes: 'מחומה לקריסה', guest: 'עם שלמה טייטלבאום' },
   { titleIncludes: 'איך נחיה פה יחד', guest: 'עם נורית קנטי' },
-  { titleIncludes: 'כאילו לא חרב העולם', guest: 'עם אהרן מלאך' }
+  { titleIncludes: 'כאילו לא חרב העולם', guest: 'עם אהרן מלאך' },
+  { titleIncludes: 'לפרוץ את שערי הרבנות', guest: 'עם רות אגיב' }
 ];
 
 // Manual title fixes for known encoding issues
@@ -115,6 +116,18 @@ async function updateEpisodes() {
     const total = items.length;
     const episodes = [];
 
+    // Preserve guest names previously inferred by map-speakers-llm.js,
+    // so this script doesn't blank them out on the next daily run.
+    let existingGuestById = {};
+    if (fs.existsSync(EPISODES_FILE)) {
+      try {
+        const existing = JSON.parse(fs.readFileSync(EPISODES_FILE, 'utf8'));
+        for (const e of (existing.episodes || [])) {
+          if (e.id != null && e.guest) existingGuestById[e.id] = e.guest;
+        }
+      } catch (e) { /* ignore — we'll just rewrite */ }
+    }
+
     items.forEach((item, index) => {
       const rawTitle = item.title?.[0] || '';
       const pubDate = item.pubDate?.[0] || '';
@@ -134,7 +147,8 @@ async function updateEpisodes() {
       }
 
       const cleaned = applyTitleOverride(cleanTitle(rawTitle));
-      const guest = extractGuest(rawTitle, cleaned);
+      const extractedGuest = extractGuest(rawTitle, cleaned);
+      const guest = extractedGuest || existingGuestById[episodeNum] || '';
 
       episodes.push({
         id: episodeNum,
