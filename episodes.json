@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 13,
+      "title": "מהישיבה לעזה ובחזרה, מאיר בוסקילה",
+      "guest": "עם מאיר בוסקילה",
+      "duration": "32:03",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-4-12/423985418-44100-2-f0e8805a6f50c.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-05-12"
+    },
+    {
       "id": 12,
       "title": "לפרוץ את שערי הרבנות",
       "guest": "עם רות אגיב",
@@ -109,5 +118,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-05-12T05:42:02.101Z"
+  "lastUpdated": "2026-05-13T05:52:46.016Z"
 }
