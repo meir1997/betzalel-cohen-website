@@ -16,6 +16,8 @@
 <body>
 
   <!-- ===== HEADER ===== -->
+  <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
+
   <header class="site-header">
     <div class="container">
       <div class="header-inner">
@@ -39,6 +41,8 @@
     </div>
   </header>
 
+  <main id="main-content" tabindex="-1">
+
   <!-- ===== BLOG HERO ===== -->
   <section class="section-blog-hero">
     <div class="container">
@@ -56,7 +60,7 @@
       <div class="blog-controls">
         <div class="search-box">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input type="text" id="searchInput" placeholder="חיפוש מאמרים..." />
+          <input type="text" id="searchInput" aria-label="חיפוש מאמרים" placeholder="חיפוש מאמרים..." />
         </div>
       </div>
 
@@ -86,6 +90,8 @@
   </section>
 
   <!-- ===== FOOTER ===== -->
+  </main>
+
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -126,7 +132,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 בצלאל כהן. כל הזכויות שמורות.</span>
+        <span>© 2026 בצלאל כהן. כל הזכויות שמורות. · <a href="negishut.html" style="color:inherit;">הצהרת נגישות</a></span>
         <span>נבנה באהבה <span class="footer-gold">♦</span></span>
       </div>
     </div>
