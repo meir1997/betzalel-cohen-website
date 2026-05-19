@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 14,
+      "title": "”הדמוקרטיה הפקירה את הילדים החרדים",
+      "guest": "עם אלי ביתאן",
+      "duration": "53:20",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-4-18/424406604-44100-2-3e082357d6879.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-05-19"
+    },
+    {
       "id": 13,
       "title": "מהישיבה לעזה ובחזרה, מאיר בוסקילה",
       "guest": "עם מאיר בוסקילה",
@@ -118,5 +127,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-05-18T06:18:46.420Z"
+  "lastUpdated": "2026-05-19T06:12:47.446Z"
 }
