@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 15,
+      "title": "\"תורתו אומנותו?\"",
+      "guest": "עם נלי מרקמן",
+      "duration": "42:16",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-4-25/424844087-44100-2-df97d967c2182.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-05-26"
+    },
+    {
       "id": 14,
       "title": "”הדמוקרטיה הפקירה את הילדים החרדים",
       "guest": "עם אלי ביתאן",
@@ -127,5 +136,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-05-25T06:39:49.163Z"
+  "lastUpdated": "2026-05-26T06:11:35.633Z"
 }
