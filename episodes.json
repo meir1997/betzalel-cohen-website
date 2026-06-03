@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 16,
+      "title": "\"כבר לא שקופות\"",
+      "guest": "עם מלכי רוטנר",
+      "duration": "39:25",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-5-1/425298441-44100-2-2b52272d3320f.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-06-02"
+    },
+    {
       "id": 15,
       "title": "\"תורתו אומנותו?\"",
       "guest": "עם נלי מרקמן",
@@ -136,5 +145,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-06-02T06:46:07.600Z"
+  "lastUpdated": "2026-06-03T06:57:14.169Z"
 }
