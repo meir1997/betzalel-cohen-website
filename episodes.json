@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 17,
+      "title": "”צורך קיצוני במתינות!\" רעיה מרי",
+      "guest": "",
+      "duration": "35:24",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-5-8/425734200-44100-2-5727d367ea511.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-06-09"
+    },
+    {
       "id": 16,
       "title": "\"כבר לא שקופות\"",
       "guest": "עם מלכי רוטנר",
@@ -145,5 +154,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-06-09T06:14:09.863Z"
+  "lastUpdated": "2026-06-09T16:33:50.534Z"
 }
