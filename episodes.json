@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 18,
+      "title": "כשחרדיות פוגשת אחריות חברתית? ציפורה גוטמן",
+      "guest": "עם ציפורה גוטמן",
+      "duration": "40:01",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-5-15/426165711-44100-2-cacdab5efcdb3.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-06-16"
+    },
+    {
       "id": 17,
       "title": "”צורך קיצוני במתינות!\" רעיה מרי",
       "guest": "",
@@ -154,5 +163,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-06-16T07:31:56.735Z"
+  "lastUpdated": "2026-06-16T18:29:53.474Z"
 }
