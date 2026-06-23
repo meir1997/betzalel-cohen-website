@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 19,
+      "title": "חרדיות משתלבת",
+      "guest": "עם אהרן רבינוביץ",
+      "duration": "49:49",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-5-23/426666992-44100-2-e38f3a08939ed.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-06-23"
+    },
+    {
       "id": 18,
       "title": "כשחרדיות פוגשת אחריות חברתית? ציפורה גוטמן",
       "guest": "עם ציפורה גוטמן",
@@ -163,5 +172,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-06-23T06:12:41.054Z"
+  "lastUpdated": "2026-06-23T16:28:44.813Z"
 }
