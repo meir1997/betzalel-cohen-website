@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 20,
+      "title": "חרדי למען הדמוקרטיה",
+      "guest": "עם טוביה אדלר",
+      "duration": "28:36",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-5-30/427082857-44100-2-db91afe3b5c37.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-06-30"
+    },
+    {
       "id": 19,
       "title": "חרדיות משתלבת",
       "guest": "עם אהרן רבינוביץ",
@@ -172,5 +181,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-06-30T06:17:00.251Z"
+  "lastUpdated": "2026-06-30T16:24:20.422Z"
 }
