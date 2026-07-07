@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 21,
+      "title": "תורה, יהדות, ואחריות",
+      "guest": "עם ח\"כ משה קינלי טור-פז",
+      "duration": "43:53",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-6-7/427497162-44100-2-1af59e59fa66a.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-07-07"
+    },
+    {
       "id": 20,
       "title": "חרדי למען הדמוקרטיה",
       "guest": "עם טוביה אדלר",
@@ -181,5 +190,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-07-07T06:13:20.961Z"
+  "lastUpdated": "2026-07-07T16:34:34.218Z"
 }
