@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 22,
+      "title": "תורת הגזע החרדית",
+      "guest": "עם מירב סבר",
+      "duration": "46:28",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-6-13/427855548-44100-2-99b8e618ca2ee.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-07-14"
+    },
+    {
       "id": 21,
       "title": "תורה, יהדות, ואחריות",
       "guest": "עם ח\"כ משה קינלי טור-פז",
@@ -190,5 +199,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-07-14T04:54:57.912Z"
+  "lastUpdated": "2026-07-14T13:00:32.246Z"
 }
