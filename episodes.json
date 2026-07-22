@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 23,
+      "title": "חרדית ממלכתית ודמוקרטית - יש דבר כזה!",
+      "guest": "",
+      "duration": "47:55",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-6-21/428328120-44100-2-1ec4033a25705.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-07-21"
+    },
+    {
       "id": 22,
       "title": "תורת הגזע החרדית",
       "guest": "עם מירב סבר",
@@ -199,5 +208,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-07-21T15:46:21.694Z"
+  "lastUpdated": "2026-07-22T05:23:38.141Z"
 }
