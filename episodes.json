@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 24,
+      "title": "מוכרחים יהדות פלורליסטית!",
+      "guest": "עם פרופ׳ מיכל מושקט-ברקן",
+      "duration": "37:06",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-6-27/428704129-44100-2-1bd8323c65175.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-07-28"
+    },
+    {
       "id": 23,
       "title": "חרדית ממלכתית ודמוקרטית - יש דבר כזה!",
       "guest": "",
@@ -208,5 +217,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-07-28T05:19:00.163Z"
+  "lastUpdated": "2026-07-28T16:06:34.283Z"
 }
