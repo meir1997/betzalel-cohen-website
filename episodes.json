@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 25,
+      "title": "מי דואג לחייל החרדי ביום שאחרי?",
+      "guest": "עם רס\"מ (במיל') אריה עמית",
+      "duration": "36:24",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-7-4/429196021-44100-2-b5fb335246f3b.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-08-04"
+    },
+    {
       "id": 24,
       "title": "מוכרחים יהדות פלורליסטית!",
       "guest": "עם פרופ׳ מיכל מושקט-ברקן",
@@ -217,5 +226,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-08-04T05:18:44.605Z"
+  "lastUpdated": "2026-08-04T16:14:05.605Z"
 }
