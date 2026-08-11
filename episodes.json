@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 26,
+      "title": "המדריכה למהפכה",
+      "guest": "עם רחל עזריה",
+      "duration": "37:33",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-7-11/429618129-44100-2-6f243df679bea.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-08-11"
+    },
+    {
       "id": 25,
       "title": "מי דואג לחייל החרדי ביום שאחרי?",
       "guest": "עם רס\"מ (במיל') אריה עמית",
@@ -226,5 +235,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-08-11T03:48:23.918Z"
+  "lastUpdated": "2026-08-11T15:01:51.911Z"
 }
