@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 27,
+      "title": "הדרך הלא סלולה למוקדי הכוח",
+      "guest": "עם מיכל צ'רנוביצקי",
+      "duration": "36:43",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-7-18/430072979-44100-2-470a83cb917b6.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-08-18"
+    },
+    {
       "id": 26,
       "title": "המדריכה למהפכה",
       "guest": "עם רחל עזריה",
@@ -235,5 +244,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-08-19T03:01:00.474Z"
+  "lastUpdated": "2026-08-19T14:37:31.512Z"
 }
