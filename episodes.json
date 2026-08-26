@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 28,
+      "title": "זרע המהפכה: החרדיות פנים רבות לה, חרדיות אמיתית - לא מה שחשבתם: הזרם החרדי-ממלכתי המתון, השותף שישנה את כללי המשחק!",
+      "guest": "",
+      "duration": "57:29",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-7-25/430507339-44100-2-1c2971b312cf3.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-08-25"
+    },
+    {
       "id": 27,
       "title": "הדרך הלא סלולה למוקדי הכוח",
       "guest": "עם מיכל צ'רנוביצקי",
@@ -244,5 +253,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-08-25T14:51:13.330Z"
+  "lastUpdated": "2026-08-26T03:09:20.055Z"
 }
