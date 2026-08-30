@@ -515,7 +515,7 @@
         var idx = POSTS.indexOf(p);
         var tag = (p.tags && p.tags.length) ? p.tags[0] : String(p.year);
         var thumb = p.image
-          ? '<img src="' + esc(p.image) + '" alt="" loading="lazy">'
+          ? '<img src="' + esc(p.image) + '" alt="תמונת המחשה למאמר: ' + esc(p.title) + '" loading="lazy">'
           : '<span class="ph">' + esc(p.title.charAt(0)) + '</span>';
         return '<a class="blog-card" href="post.html?id=' + idx + '">' +
                  '<div class="thumb">' + thumb + '</div>' +

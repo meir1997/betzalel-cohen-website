@@ -171,7 +171,7 @@ function render() {
       listEl.innerHTML = pageItems.map((p, i) => {
         const idx = POSTS.indexOf(p);
         const thumbContent = p.image
-          ? '<img src="' + p.image + '" alt="" style="width:100%;height:100%;object-fit:cover;" loading="lazy">'
+          ? '<img src="' + p.image + '" alt="תמונת המחשה למאמר: ' + p.title + '" style="width:100%;height:100%;object-fit:cover;" loading="lazy">'
           : p.title.charAt(0);
         const thumbBg = p.image ? 'background:none;' : 'background:linear-gradient(135deg,#1a3557,#2c5282);';
         const tagsHtml = (p.tags || []).map(t =>

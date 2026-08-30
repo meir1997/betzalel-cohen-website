@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     featuredEl.innerHTML = latest.map((p, i) => {
       const idx = POSTS.indexOf(p);
       const imgHtml = p.image
-        ? '<img src="' + p.image + '" alt="" style="width:100%;height:100%;object-fit:cover;" loading="lazy">'
+        ? '<img src="' + p.image + '" alt="תמונת המחשה למאמר: ' + p.title + '" style="width:100%;height:100%;object-fit:cover;" loading="lazy">'
         : '<div class="post-card-image-placeholder">' + p.title.charAt(0) + '</div>';
       return `
       <div class="post-card" style="animation-delay:${i * 0.1}s">
