@@ -182,7 +182,7 @@ function render() {
           <div style="height:140px;border-radius:8px;overflow:hidden;margin-bottom:12px;${thumbBg}display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.2);font-family:'Frank Ruhl Libre',serif;font-size:2.5rem;font-weight:900;">${thumbContent}</div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">${tagsHtml}</div>
           <span class="post-list-date">${formatDate(p.date)}</span>
-          <h3 class="post-list-title"><a href="post.html?id=${idx}">${p.title}</a></h3>
+          <h2 class="post-list-title"><a href="post.html?id=${idx}">${p.title}</a></h2>
           <p class="post-list-excerpt">${p.excerpt}</p>
           <a href="post.html?id=${idx}" class="post-list-read">קרא עוד ←</a>
         </div>`;
