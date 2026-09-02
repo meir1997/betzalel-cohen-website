@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 29,
+      "title": "ישראל היא המדינה המסורתית ביותר במערב",
+      "guest": "עם פרופ' משה הלינגר",
+      "duration": "48:43",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-8-1/430946903-44100-2-8aefbe5a97129.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-09-01"
+    },
+    {
       "id": 28,
       "title": "זרע המהפכה: הזרם הממלכתי המתון שישנה את כללי המשחק!",
       "guest": "",
@@ -253,5 +262,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-09-01T17:43:17.349Z"
+  "lastUpdated": "2026-09-02T06:57:28.130Z"
 }
