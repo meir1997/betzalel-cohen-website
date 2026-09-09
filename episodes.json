@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 30,
+      "title": "כשדמוקרטיה ואקטיביזם פוגשים את החברה החרדית",
+      "guest": "עם מיכל גלבוע אטר והרב בצלאל כהן",
+      "duration": "40:47",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-8-8/431427091-44100-2-ce73348f62d2b.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-09-08"
+    },
+    {
       "id": 29,
       "title": "ישראל היא המדינה המסורתית ביותר במערב",
       "guest": "עם פרופ' משה הלינגר",
@@ -262,5 +271,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-09-09T07:13:05.255Z"
+  "lastUpdated": "2026-09-09T17:42:28.022Z"
 }
