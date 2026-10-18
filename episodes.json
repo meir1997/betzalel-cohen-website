@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 32,
+      "title": "הנשים החרדיות שמשנות את כללי המשחק",
+      "guest": "עם פייני סוקניק",
+      "duration": "44:16",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-9-18/434407265-44100-2-93469378a9303.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-10-18"
+    },
+    {
       "id": 31,
       "title": "החברה החרדית ביום שאחרי 7.10",
       "guest": "עם לי כוהנר",
@@ -280,5 +289,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-10-17T16:55:07.098Z"
+  "lastUpdated": "2026-10-18T07:05:32.402Z"
 }
