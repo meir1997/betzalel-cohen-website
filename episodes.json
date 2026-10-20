@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 33,
+      "title": "מי באמת מרוויח מהאוטונומיה החרדית?",
+      "guest": "עם נעם גולד",
+      "duration": "32:07",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-9-20/434567398-44100-2-c60a54a777558.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-10-20"
+    },
+    {
       "id": 32,
       "title": "הנשים החרדיות שמשנות את כללי המשחק",
       "guest": "עם פייני סוקניק",
@@ -289,5 +298,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-10-20T07:19:33.795Z"
+  "lastUpdated": "2026-10-20T18:23:41.977Z"
 }
