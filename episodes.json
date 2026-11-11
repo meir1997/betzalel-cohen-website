@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 35,
+      "title": "היום שאחרי הבחירות, חלק ב",
+      "guest": "",
+      "duration": "38:49",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-10-9/436302410-44100-2-69b6f0c7301c78.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-11-10"
+    },
+    {
       "id": 34,
       "title": "הבחירות – שיחת היום שאחרי",
       "guest": "עם מיכל גלבוע אטר והרב בצלאל כהן",
@@ -307,5 +316,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-11-11T09:01:23.986Z"
+  "lastUpdated": "2026-11-11T21:07:54.401Z"
 }
