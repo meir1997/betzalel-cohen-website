@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 36,
+      "title": "איך בונים חברה דמוקרטית במדינה שבה אין הפרדה בין דת לבין מדינה? תמי הופמן",
+      "guest": "עם תמי הופמן",
+      "duration": "45:33",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-10-16/436852264-44100-2-61900936af2828.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-11-17"
+    },
+    {
       "id": 35,
       "title": "היום שאחרי הבחירות, חלק ב",
       "guest": "",
@@ -316,5 +325,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-11-16T23:15:26.729Z"
+  "lastUpdated": "2026-11-17T10:24:19.646Z"
 }
