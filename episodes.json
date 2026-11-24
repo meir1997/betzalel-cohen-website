@@ -1,6 +1,15 @@
 {
   "episodes": [
     {
+      "id": 37,
+      "title": "כשהמחיצה מתרחבת הקולות מתרבים",
+      "guest": "עם אסתי רידר",
+      "duration": "42:18",
+      "audioUrl": "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-10-24/437493537-44100-2-73e633ac2068b.mp3",
+      "url": "https://www.youtube.com/playlist?list=PLFsmVOv76mMrIgph_mbxx_wFTRPDdecRY",
+      "publishedAt": "2026-11-24"
+    },
+    {
       "id": 36,
       "title": "איך בונים חברה דמוקרטית במדינה שבה אין הפרדה בין דת לבין מדינה? תמי הופמן",
       "guest": "עם תמי הופמן",
@@ -325,5 +334,5 @@
       "publishedAt": "2026-02-04"
     }
   ],
-  "lastUpdated": "2026-11-24T01:31:32.819Z"
+  "lastUpdated": "2026-11-24T12:12:11.830Z"
 }
